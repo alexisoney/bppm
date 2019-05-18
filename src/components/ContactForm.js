@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignIn() {
+export default function ContactForm() {
   const classes = useStyles();
 
   return (
@@ -43,6 +43,7 @@ export default function SignIn() {
           BPPM - Contact
         </Typography>
         <form
+          name="contact"
           className={classes.form}
           noValidate
           data-netlify="true"

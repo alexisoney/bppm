@@ -1,11 +1,11 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import SignUp from "../components/SignUp";
+import ContactForm from "../components/ContactForm";
 
 export default function App() {
   return (
     <Container maxWidth="sm">
-      <SignUp />
+      <ContactForm />
     </Container>
   );
 }
