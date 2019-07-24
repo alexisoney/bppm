@@ -1,10 +1,15 @@
 $unit: 8;
 
 $breakpoints: (
-  phone: 500px,
-  tablet: 768px,
+  narrow: 500px,
+  medium: 768px,
   wide: 1200px,
 );
+
+$max-widths__page-blocks: 1220px;
+
+$margins__page-blocks--narrow: #{$unit * 8}px;
+$margins__page-blocks--wide: #{$unit * 14}px;
 
 $colors__alpha: #e21e26;
 $colors__beta: #edeff5;

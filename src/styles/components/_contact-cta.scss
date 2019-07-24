@@ -1,11 +1,11 @@
 .contact-cta {
-  padding: #{$unit * 12}px #{$unit * 5}px;
+  margin: #{$unit * 12}px 0 #{$unit * 12}px;
+  padding: 0 #{$unit * 5}px;
 }
 
 @include media('>=wide') {
   .contact-cta {
-    padding-top: #{$unit * 14}px;
-    padding-bottom: #{$unit * 14}px;
+    margin: #{$unit * 14}px 0 #{$unit * 14}px;
   }
 }
 
@@ -13,11 +13,16 @@
   margin: 0 0 #{$unit * 3}px;
 
   text-align: center;
+  font-size: 24px;
+  line-height: 30px;
 }
 
 @include media('>=wide') {
   .contact-cta__catchline {
     margin-bottom: #{$unit * 2}px;
+
+    font-size: 48px;
+    line-height: 56px;
   }
 }
 

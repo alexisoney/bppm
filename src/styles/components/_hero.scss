@@ -6,10 +6,12 @@
 
   height: 100vh;
   padding: #{$unit * 4}px;
+  margin: 0 0 $margins__page-blocks--narrow;
 }
 
 @include media('>=wide') {
   .hero {
+    margin-bottom: $margins__page-blocks--wide;
     padding: 0 12%;
   }
 }

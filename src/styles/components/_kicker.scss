@@ -1,0 +1,30 @@
+.kicker {
+  max-width: $max-widths__page-blocks;
+  margin: 0 auto $margins__page-blocks--narrow;
+  padding: 0 #{$unit * 4}px;
+}
+
+@include media('>=wide') {
+  .kicker {
+    margin-bottom: $margins__page-blocks--wide;
+  }
+}
+
+.kicker > p {
+  margin: 0;
+
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: 700;
+
+  & > strong {
+    color: $colors__alpha;
+  }
+}
+
+@include media('>=wide') {
+  .kicker > p {
+    font-size: 48px;
+    line-height: 72px;
+  }
+}

@@ -34,14 +34,14 @@ h1 strong {
 }
 
 h2 {
-  font-size: 24px;
-  line-height: 30px;
+  font-size: 28px;
+  line-height: 32px;
 }
 
 @include media('>=wide') {
   h2 {
-    font-size: 48px;
-    line-height: 56px;
+    font-size: 80px;
+    line-height: 116px;
   }
 }
 
