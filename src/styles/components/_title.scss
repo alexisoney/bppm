@@ -1,12 +1,12 @@
 .title {
   max-width: $max-widths__page-blocks;
-  margin: 0 0 $margins__page-blocks--narrow;
+  margin: 0 0 #{$unit * 4}px;
   padding: 0 #{$unit * 4}px;
 }
 
 @include media('>=wide') {
   .title {
-    margin: 0 auto $margins__page-blocks--wide;
+    margin: 0 auto #{$unit * 6}px;
     padding: 0 #{$unit * 18}px;
   }
 
