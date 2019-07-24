@@ -1,0 +1,16 @@
+.button {
+  padding: #{$unit * 2.5}px #{$unit * 3}px;
+  width: 264px;
+
+  background-color: $colors__alpha;
+
+  color: $colors__omega;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

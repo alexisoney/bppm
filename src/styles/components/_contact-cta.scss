@@ -1,0 +1,32 @@
+.contact-cta {
+  padding: #{$unit * 12}px #{$unit * 5}px;
+}
+
+@include media('>=wide') {
+  .contact-cta {
+    padding-top: #{$unit * 14}px;
+    padding-bottom: #{$unit * 14}px;
+  }
+}
+
+.contact-cta__catchline {
+  margin: 0 0 #{$unit * 3}px;
+
+  text-align: center;
+}
+
+@include media('>=wide') {
+  .contact-cta__catchline {
+    margin-bottom: #{$unit * 2}px;
+  }
+}
+
+.contact-cta__divider {
+  margin: 0 auto #{$unit * 6}px;
+
+  border-color: $colors__beta;
+}
+
+.contact-cta__cta {
+  margin: 0 auto;
+}

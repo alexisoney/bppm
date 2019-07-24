@@ -1,0 +1,162 @@
+.navigation {
+  position: absolute;
+  top: #{$unit * 12}px;
+  left: 10%;
+  display: flex;
+  justify-content: center;
+
+  width: 80%;
+  padding: 0 10%;
+
+  z-index: 9999;
+}
+
+.navigation--small {
+  top: 0;
+  left: 0;
+  display: block;
+
+  width: calc(100vw - #{$unit * 4 * 2}px);
+  margin: #{$unit * 4}px;
+  padding: 0;
+
+  overflow: auto;
+}
+
+.navigation--small.navigation--open {
+  height: calc(100vh - #{$unit * 4 * 2}px);
+  max-height: calc(100vh - #{$unit * 4 * 2}px);
+}
+
+.navigation__background {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: $colors__gamma;
+
+  opacity: 0.7;
+  z-index: -1;
+}
+
+.navigation__logo {
+  display: block;
+
+  height: #{$unit * 4}px;
+  width: auto;
+
+  margin: auto;
+  margin-left: 0;
+  padding: 0 #{$unit * 4}px;
+}
+
+.navigation--small .navigation__logo {
+  height: #{$unit * 2}px;
+
+  margin: #{$unit * 3}px 0;
+  padding-left: #{$unit * 2}px;
+}
+
+.navigation--small.navigation--open .navigation__logo {
+  margin-bottom: #{$unit * 6}px;
+}
+
+.navigation__button {
+  display: none;
+}
+
+.navigation--small .navigation__button {
+  display: block;
+  position: absolute;
+  top: #{$unit * 3}px;
+  right: #{$unit * 2.5}px;
+  transform: translateY(-30%);
+
+  margin: 0;
+  padding: 0;
+
+  color: $colors__omega;
+  font-size: 24px;
+
+  cursor: pointer;
+  user-select: none;
+}
+
+.navigation--small.navigation--open .navigation__button-open {
+  display: none;
+}
+
+.navigation--small .navigation__button-close {
+  display: none;
+}
+
+.navigation--small.navigation--open .navigation__button-close {
+  display: initial;
+}
+
+.navigation__items {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  height: 100%;
+  margin: auto;
+  margin-right: 0;
+  padding: 0;
+
+  list-style: none;
+  white-space: nowrap;
+}
+
+.navigation--small .navigation__items {
+  display: none;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+
+  height: auto;
+  margin: 0;
+  padding-left: #{$unit * 2}px;
+}
+
+.navigation--small.navigation--open .navigation__items {
+  display: initial;
+}
+
+.navigation__item {
+  margin: 0;
+  padding: 0;
+}
+
+.navigation__link {
+  display: inline-block;
+
+  margin: 0;
+  padding: #{$unit * 4.5}px #{$unit * 2}px;
+
+  color: $colors__omega;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: $colors__alpha;
+    cursor: pointer;
+  }
+}
+
+.navigation__link--active {
+  background-color: $colors__alpha;
+}
+
+.navigation--small .navigation__link {
+  margin: #{$unit * 2}px 0;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  &:hover {
+    background-color: unset;
+  }
+}

@@ -1,17 +1,14 @@
 module.exports = {
   plugins: [
-    'gatsby-plugin-top-layout',
+    `gatsby-plugin-sass`,
     {
-      resolve: 'gatsby-plugin-material-ui',
-      // If you want to use styled components you should change the injection order.
+      resolve: 'gatsby-source-storyblok',
       options: {
-        // stylesProvider: {
-        //   injectFirst: true,
-        // },
+        accessToken: 'aRfTd3jtc279dSfFa6fziAtt',
+        homeSlug: 'home',
+        version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
       },
     },
-    // If you want to use styled components you should add the plugin here.
-    // 'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
   ],
   siteMetadata: {
