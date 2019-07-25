@@ -6,6 +6,7 @@ import Hero from './hero';
 import Kicker from './kicker';
 import Navigation from './navigation';
 import Page from './page';
+import TeamMember from './team-member';
 import Text from './text';
 import Title from './title';
 
@@ -17,6 +18,7 @@ const ComponentList = {
   hero: Hero,
   kicker: Kicker,
   page: Page,
+  teamMember: TeamMember,
   text: Text,
   title: Title,
   navigation: Navigation,
