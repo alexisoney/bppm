@@ -1,0 +1,11 @@
+.icon-and-title__title {
+  font-size: 16px;
+  height: 24px;
+}
+
+@include media('>=medium') {
+  .icon-and-title__title {
+    font-size: 24px;
+    height: 32px;
+  }
+}

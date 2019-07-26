@@ -8,13 +8,8 @@ export default props => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const items = useRef();
 
-  function getWindowWith() {
-    return window.innerWidth;
-  }
-
   function handleClick(item) {
     setActive(item);
-    console.log(windowWidth, breakpoints.wide);
     if (windowWidth < breakpoints.wide && items.current) {
       const clickedIndex = props.blok.items.findIndex(i => i._uid === item._uid);
       items.current.style.transform = `translateX(${-50 * (clickedIndex - 1)}vw)`;

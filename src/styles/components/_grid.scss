@@ -1,0 +1,22 @@
+.grid {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+
+  max-width: $max-widths__page-blocks;
+  margin: 0 auto $margins__page-blocks--narrow;
+  padding: 0 #{$unit * 4}px;
+}
+
+.grid__column {
+  flex: 0 0 auto;
+
+  width: 50%;
+  margin-bottom: #{$unit * 6}px;
+}
+
+@include media('>=medium') {
+  .grid__column {
+    width: 33%;
+  }
+}
