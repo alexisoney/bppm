@@ -17,7 +17,7 @@ export default props => {
           <h3 className='team-member__name'>{name}</h3>
           <hr className='team-member__divider' />
           <p className='team-member__description'>{description}</p>
-          <a href={linkedin.url} target='_blank'>
+          <a href={linkedin.url} target='_blank' rel='noopener noreferrer'>
             <img className='team-member__social-icon' src={linkedinIcon} alt='Linkedin' />
           </a>
         </div>

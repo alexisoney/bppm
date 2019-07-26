@@ -4,6 +4,8 @@ import ContactCTA from './contact-cta';
 import Fullpage from './fullpage';
 import Hero from './hero';
 import Kicker from './kicker';
+import ListDots from './list-dots';
+import ListPanel from './list-panel';
 import Navigation from './navigation';
 import Page from './page';
 import TeamMember from './team-member';
@@ -17,6 +19,8 @@ const ComponentList = {
   fullpage: Fullpage,
   hero: Hero,
   kicker: Kicker,
+  listDots: ListDots,
+  listPanel: ListPanel,
   page: Page,
   teamMember: TeamMember,
   text: Text,

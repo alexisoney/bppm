@@ -1,0 +1,139 @@
+.list-panel {
+  max-width: $max-widths__page-blocks;
+  margin: 0 0 $margins__page-blocks--narrow;
+}
+
+@include media('>=wide') {
+  .list-panel {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    height: 85vh;
+    margin: 0 auto $margins__page-blocks--wide;
+  }
+}
+
+.list-panel__image {
+  display: block;
+  position: relative;
+
+  height: 45vh;
+  margin-bottom: -33%;
+
+  z-index: -1;
+}
+
+@include media('>=wide') {
+  .list-panel__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: calc(40% + #{$unit * 26 / 2}px);
+    object-fit: cover;
+    object-position: center center;
+    margin: 0;
+  }
+}
+
+.list-panel__titles {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  margin: 0 #{$unit * 2}px #{$unit * 4}px;
+  padding: 0;
+
+  background-color: #4d4d4d;
+  list-style: none;
+}
+
+@include media('>=wide') {
+  .list-panel__titles {
+    flex: 0 0 auto;
+
+    flex-flow: column nowrap;
+    justify-content: center;
+
+    margin: 0;
+    margin-left: 40%;
+    width: #{$unit * 26}px;
+
+    background-color: transparent;
+  }
+}
+
+.list-panel__title {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+
+  height: #{$unit * 12}px;
+  width: calc(50% - 0.5px);
+  padding: #{$unit * 3}px #{$unit * 2}px;
+  margin-bottom: 1px;
+
+  background-color: $colors__gamma;
+
+  color: $colors__omega;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+
+  overflow: hidden;
+
+  &:hover {
+    background-color: $colors__alpha;
+    cursor: pointer;
+  }
+}
+
+@include media('>=wide') {
+  .list-panel__title {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.list-panel__title--active {
+  background-color: $colors__alpha;
+}
+
+.list-panel__content {
+  margin: 0 #{$unit * 4}px;
+}
+
+@include media('>=wide') {
+  .list-panel__content {
+    margin: 0;
+    margin-left: #{$unit * 8}px;
+    padding-right: #{$unit * 4}px;
+  }
+}
+.list-panel__content-title {
+  margin: 0 0 #{$unit * 2}px;
+
+  color: $colors__alpha;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+@include media('>=wide') {
+  .list-panel__content-title {
+    font-size: 48px;
+    line-height: 64px;
+  }
+}
+
+.list-panel__content-divider {
+  margin-bottom: #{$unit * 2}px;
+}
+
+@include media('>=wide') {
+  .list-panel__content-divider {
+    margin-bottom: #{$unit * 4}px;
+  }
+}
