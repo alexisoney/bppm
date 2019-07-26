@@ -14,3 +14,22 @@
     cursor: pointer;
   }
 }
+
+.button__link:link,
+.button__link:visited,
+.button__link:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+.button--centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button--outlined {
+  background-color: $colors__omega;
+  border: 1px solid $colors__alpha;
+
+  color: $colors__alpha;
+}

@@ -49,3 +49,11 @@
 .title__text {
   margin: 0;
 }
+
+.title--colored .title__text {
+  color: $colors__alpha;
+}
+
+.title--no-index .title__text {
+  margin-bottom: #{$unit * 2}px;
+}

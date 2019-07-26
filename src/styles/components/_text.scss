@@ -4,6 +4,10 @@
   padding: 0 #{$unit * 2}px;
 }
 
+.text + .button {
+  margin-top: calc(-#{$margins__page-blocks--narrow} / 2);
+}
+
 @include media('>=wide') {
   .text {
     display: flex;
@@ -11,6 +15,10 @@
 
     margin: 0 auto $margins__page-blocks--wide;
     padding: 0 #{$unit * 18}px;
+  }
+
+  .text + .button {
+    margin-top: calc(-#{$margins__page-blocks--wide} / 2);
   }
 }
 
@@ -34,24 +42,25 @@
   line-height: 24px;
 }
 
-@include media('>=wide') {
-  .text__content {
-    font-size: inherit;
-    line-height: inherit;
-  }
-}
-
-@include media('>=wide') {
-  .text__content {
-    margin-right: #{$unit * 8}px;
-  }
-}
-
 .text__content > p {
   margin: #{$unit * 2}px 0;
 
   &:first-of-type {
     margin-top: 0;
+  }
+}
+
+@include media('>=wide') {
+  .text__content {
+    font-size: inherit;
+    line-height: inherit;
+
+    margin-right: #{$unit * 8}px;
+  }
+
+  .text__content:first-child {
+    margin-right: 0;
+    padding: 0 #{$unit * 15}px;
   }
 }
 

@@ -11,6 +11,8 @@ const Page = props => {
     let titleIndex = 0;
     props.blok.body.forEach(blok => {
       if (blok.component === 'title') {
+        if (blok.no_index) return null;
+
         ++titleIndex;
         blok.index = titleIndex < 10 ? `0${titleIndex}` : titleIndex;
         titles.push({

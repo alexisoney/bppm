@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Button from './button';
 import ContactCTA from './contact-cta';
 import Fullpage from './fullpage';
 import Grid from './grid';
@@ -17,6 +18,7 @@ import Title from './title';
 const ComponentNotFound = props => <div>Component {props.blok.component} is not defined. Add it to components.js</div>;
 
 const ComponentList = {
+  button: Button,
   contactCTA: ContactCTA,
   fullpage: Fullpage,
   grid: Grid,
