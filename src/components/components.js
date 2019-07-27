@@ -9,6 +9,7 @@ import IconAndTitle from './icon-and-title';
 import Kicker from './kicker';
 import ListDots from './list-dots';
 import ListPanel from './list-panel';
+import MapComponent from './map';
 import Navigation from './navigation';
 import Page from './page';
 import TeamMember from './team-member';
@@ -27,6 +28,7 @@ const ComponentList = {
   kicker: Kicker,
   listDots: ListDots,
   listPanel: ListPanel,
+  map: MapComponent,
   page: Page,
   teamMember: TeamMember,
   text: Text,

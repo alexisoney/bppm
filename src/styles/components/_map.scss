@@ -1,0 +1,52 @@
+.map {
+  position: relative;
+  margin: 0 0 $margins__page-blocks--narrow;
+}
+
+@include media('>=wide') {
+  .map {
+    margin: 0 0 $margins__page-blocks--wide;
+
+    overflow: hidden;
+  }
+}
+
+@include media('>=wide') {
+  .map__image {
+    position: absolute;
+    width: 70%;
+    height: 100%;
+  }
+}
+
+.map__image + .map__content {
+  position: relative;
+  margin-top: -10%;
+}
+
+@include media('>=wide') {
+  .map__image + .map__content {
+    margin: #{$unit * 6}px 20% #{$unit * 17}px 55%;
+  }
+}
+
+.map__content {
+  margin: 0 #{$unit * 2}px;
+  padding: #{$unit * 3}px;
+
+  background-color: $colors__omega;
+  box-shadow: -30px 20px 40px 0 rgba(0, 0, 0, 0.1);
+}
+
+.map__title,
+.map__text {
+  margin: 0;
+}
+
+.map__title {
+  font-weight: 700;
+}
+
+.map__text:not(:last-child) {
+  margin-bottom: #{$unit * 4}px;
+}
