@@ -12,6 +12,10 @@
     height: 85vh;
     margin: 0 auto $margins__page-blocks--wide;
   }
+
+  .list-panel--right {
+    flex-direction: row-reverse;
+  }
 }
 
 .list-panel__image {
@@ -19,9 +23,12 @@
   position: relative;
 
   height: 45vh;
-  margin-bottom: -33%;
 
   z-index: -1;
+}
+
+.list-panel__image + .list-panel__titles {
+  margin-top: -#{$unit * 18}px;
 }
 
 @include media('>=wide') {
@@ -35,6 +42,11 @@
     object-fit: cover;
     object-position: center center;
     margin: 0;
+  }
+
+  .list-panel--right .list-panel__image {
+    left: unset;
+    right: 0;
   }
 }
 
@@ -62,6 +74,10 @@
     width: #{$unit * 26}px;
 
     background-color: transparent;
+  }
+
+  .list-panel--right .list-panel__titles {
+    margin: 0 40% 0 #{$unit * 6}px;
   }
 }
 

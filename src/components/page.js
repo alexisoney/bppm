@@ -30,6 +30,11 @@ const Page = props => {
     });
   }
 
+  let hasContactForm;
+  if (props.blok.body) {
+    hasContactForm = props.blok.body.findIndex(blok => blok.component === 'contactForm') !== -1;
+  }
+
   return (
     <>
       <Navigation blok={props.navigation} />
@@ -40,7 +45,7 @@ const Page = props => {
             blok: blok,
           })
         )}
-      <ContactCTA blok={props.contactCTA} />
+      {!hasContactForm && <ContactCTA blok={props.contactCTA} />}
       <Footer blok={props.navigation} />
     </>
   );

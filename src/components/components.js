@@ -2,6 +2,7 @@ import React from 'react';
 
 import Button from './button';
 import ContactCTA from './contact-cta';
+import ContactForm from './contact-form';
 import Fullpage from './fullpage';
 import Grid from './grid';
 import Hero from './hero';
@@ -21,6 +22,7 @@ const ComponentNotFound = props => <div>Component {props.blok.component} is not 
 const ComponentList = {
   button: Button,
   contactCTA: ContactCTA,
+  contactForm: ContactForm,
   fullpage: Fullpage,
   grid: Grid,
   hero: Hero,

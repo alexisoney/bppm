@@ -1,0 +1,52 @@
+.contact-form {
+  max-width: $max-widths__page-blocks;
+  margin: 0 0 $margins__page-blocks--narrow;
+  padding: 0 #{$unit * 2}px;
+}
+
+@include media('>=wide') {
+  .contact-form {
+    max-width: calc(#{$max-widths__page-blocks} / 2);
+    margin: 0 auto $margins__page-blocks--wide;
+  }
+}
+
+.contact-form .button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-form__field {
+  display: block;
+
+  width: 100%;
+  margin: 0 0 #{$unit * 2}px;
+  padding: #{$unit}px #{$unit * 2}px;
+
+  border: none;
+  border-bottom: 1px solid #222222;
+
+  &:focus {
+    outline: none;
+  }
+}
+@include media('>=wide') {
+  .contact-form__field {
+    margin-bottom: #{$unit * 4}px;
+  }
+
+  .contact-form__field--small {
+    display: inline-block;
+    width: calc((100% - #{$unit * 3}px) / 2);
+  }
+
+  .contact-form__field--small + .contact-form__field--small {
+    margin-left: #{$unit * 3}px;
+  }
+}
+
+.contact-form__field[type='textarea'] {
+  margin-top: #{$unit * 3}px;
+  margin-bottom: #{$unit * 6}px;
+}
