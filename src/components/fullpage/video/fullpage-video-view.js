@@ -1,6 +1,7 @@
 import React from 'react';
 
-import video from './assets/video.mp4';
+const video =
+  'https://res.cloudinary.com/studio-basilic-tropical/video/upload/v1564391852/BPPM/911-Placeholder_teiznz.mp4';
 
 export default props => (
   <>
