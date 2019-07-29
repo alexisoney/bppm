@@ -5,8 +5,16 @@ import {breakpoints} from '../../variables';
 
 export default props => {
   const [active, setActive] = useState(props.blok.items[0]);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(getWindowWidth());
   const items = useRef();
+
+  function getWindowWidth() {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth;
+    } else {
+      return null;
+    }
+  }
 
   function handleClick(item) {
     setActive(item);
@@ -18,7 +26,7 @@ export default props => {
 
   useEffect(() => {
     function handleResize() {
-      setWindowWidth(window.innerWidth);
+      setWindowWidth(getWindowWidth());
     }
 
     window.addEventListener('resize', handleResize);

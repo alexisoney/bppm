@@ -12,7 +12,7 @@ export default props => {
     if (props.blok.link.url || props.blok.file) {
       const url = props.blok.link.url ? props.blok.link.url : props.blok.file;
 
-      if (props.link.linktype === 'story') {
+      if (props.link && props.link.linktype === 'story') {
         return (
           <SbEditable content={props.blok}>
             <Link className='button' to={url}>
