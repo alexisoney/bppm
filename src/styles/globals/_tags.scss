@@ -29,7 +29,9 @@ h1 strong {
 }
 
 @include media('>=wide') {
-  h1 {
+  h1,
+  h1 b,
+  h1 strong {
     font-size: 104px;
     line-height: 116px;
   }

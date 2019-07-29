@@ -1,4 +1,5 @@
 .button {
+  display: block;
   padding: #{$unit * 2.5}px #{$unit * 3}px;
   width: 264px;
 
@@ -12,6 +13,13 @@
 
   &:hover {
     cursor: pointer;
+  }
+
+  &:link,
+  &:visited,
+  &:active {
+    color: $colors__omega;
+    text-decoration: none;
   }
 }
 

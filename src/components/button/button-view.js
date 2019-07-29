@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'gatsby';
 import SbEditable from 'storyblok-react';
 
 export default props => {
@@ -8,23 +9,44 @@ export default props => {
   buttonClassName += props.blok && props.blok.outlined ? ` button--outlined` : '';
 
   if (props.blok) {
-    const Wrapper = ({children}) => (
-      <SbEditable content={props.blok}>
-        <div className={buttonClassName}>{children}</div>
-      </SbEditable>
-    );
-
     if (props.blok.link.url || props.blok.file) {
       const url = props.blok.link.url ? props.blok.link.url : props.blok.file;
+
+      if (props.link.linktype === 'story') {
+        return (
+          <SbEditable content={props.blok}>
+            <Link className='button' to={url}>
+              {props.blok.text}
+            </Link>
+          </SbEditable>
+        );
+      } else {
+        return (
+          <SbEditable content={props.blok}>
+            <a className='button' href={url} target='_blank' rel='noopener noreferrer'>
+              {props.blok.text}
+            </a>
+          </SbEditable>
+        );
+      }
+    } else {
+      return <div className={buttonClassName}>{props.blok.text}</div>;
+    }
+  }
+
+  if (props.link) {
+    if (props.link.linktype === 'story') {
       return (
-        <Wrapper>
-          <a className='button__link' href={url} target='_blank' rel='noopener noreferrer'>
-            {props.blok.text}
-          </a>
-        </Wrapper>
+        <Link className='button' to={`/${props.link.cached_url}`}>
+          {props.children}
+        </Link>
       );
     } else {
-      return <Wrapper>{props.blok.text}</Wrapper>;
+      return (
+        <a className='button' href={props.link.cached_url} target='_blank' rel='noopener noreferrer'>
+          {props.children}
+        </a>
+      );
     }
   }
 

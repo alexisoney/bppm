@@ -9,7 +9,7 @@ import {createNumber} from '../utils';
 import {markdownToHTML} from '../../../utils';
 
 const Text = props => {
-  const {align, background, footer, cta, index, isLast} = props;
+  const {align, background, footer, cta, index, isLast, link} = props;
 
   let componentClassName = 'fullpage-text';
   componentClassName += align[0] ? ` fullpage-text--${align[0]}` : '';
@@ -31,7 +31,7 @@ const Text = props => {
         <h1 className='fullpage-text__headline'>{headline}</h1>
         <div className='fullpage-text__content'>
           <p className='fullpage-text__description'>{description}</p>
-          {cta && <Button>{cta}</Button>}
+          {cta && <Button link={link}>{cta}</Button>}
         </div>
       </div>
 
