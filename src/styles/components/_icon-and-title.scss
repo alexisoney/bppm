@@ -1,13 +1,19 @@
+.icon-and-title__icon {
+  display: block;
+
+  height: 64px;
+  width: auto;
+}
+
 .icon-and-title__title {
   display: inline-block;
 
   font-size: 16px;
-  height: 24px;
+  font-weight: 700;
 }
 
 @include media('>=medium') {
   .icon-and-title__title {
     font-size: 24px;
-    height: 32px;
   }
 }

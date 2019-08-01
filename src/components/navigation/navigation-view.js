@@ -3,6 +3,8 @@ import {Link} from 'gatsby';
 import SbEditable from 'storyblok-react';
 
 import logoSVG from '../../assets/logo.svg';
+import menuIcon from '../../assets/icon_menu.svg';
+import closeIcon from '../../assets/icon_close.svg';
 
 export default props => {
   if (!props.blok.navigations_items) return null;
@@ -76,8 +78,12 @@ export default props => {
       <div className='navigation__background' />
       <img className='navigation__logo' src={logoSVG} alt='BPPM' ref={logo} />
       <div className='navigation__button' onClick={toggleNavigation}>
-        <span className='navigation__button-open'>O</span>
-        <span className='navigation__button-close'>X</span>
+        <span className='navigation__button-open'>
+          <img alt='Menu' src={menuIcon} />
+        </span>
+        <span className='navigation__button-close'>
+          <img alt='Close' src={closeIcon} />
+        </span>
       </div>
       <ul className='navigation__items' ref={items}>
         {props.blok.navigations_items.map(item => {

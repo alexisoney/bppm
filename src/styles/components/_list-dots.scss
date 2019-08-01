@@ -89,6 +89,10 @@
 }
 
 .list-dots__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   height: 96px;
   width: 96px;
   margin: 0 auto;
@@ -108,6 +112,17 @@
 
 .list-dots__item--active .list-dots__icon {
   background-color: $colors__alpha;
+}
+
+.list-dots__icon-svg {
+  display: block;
+
+  max-width: 32px;
+  max-height: 32px;
+}
+
+.list-dots__item--active .list-dots__icon-svg {
+  filter: invert(1);
 }
 
 .list-dots__content {

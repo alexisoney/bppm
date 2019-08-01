@@ -12,7 +12,7 @@
   flex: 0 0 auto;
 
   width: 50%;
-  margin-bottom: #{$unit * 6}px;
+  padding: 0 #{$unit * 1.5}px #{$unit * 6}px;
 }
 
 @include media('>=medium') {

@@ -56,7 +56,9 @@ export default props => {
               <li className={itemClassName} key={item._uid} onClick={() => handleClick(item)}>
                 {item.title}
                 <div className='list-dots__icon-container'>
-                  <div className='list-dots__icon' />
+                  <div className='list-dots__icon'>
+                    <img className='list-dots__icon-svg' src={item.icon} />
+                  </div>
                 </div>
               </li>
             );

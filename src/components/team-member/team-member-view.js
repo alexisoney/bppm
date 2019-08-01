@@ -3,7 +3,7 @@ import Img from 'gatsby-image';
 import {getFluidGatsbyImage} from 'gatsby-storyblok-image';
 import SbEditable from 'storyblok-react';
 
-import linkedinIcon from '../../assets/linkedin.png';
+import linkedinIcon from '../../assets/icon_linkedin.svg';
 
 export default props => {
   const {darkmode, description, linkedin, name, picture, strengths} = props.blok;

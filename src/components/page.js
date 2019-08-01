@@ -4,10 +4,12 @@ import Components from './components.js';
 import ContactCTA from './contact-cta';
 import Footer from './footer';
 import Navigation from './navigation';
+import PageNavigation from './page-navigation';
 
 const Page = props => {
+  let titles = [];
+
   if (props.blok.body) {
-    let titles = [];
     let titleIndex = 0;
     props.blok.body.forEach(blok => {
       if (blok.component === 'title') {
@@ -38,6 +40,7 @@ const Page = props => {
   return (
     <>
       <Navigation blok={props.navigation} />
+      {/* {titles.length > 0 && <PageNavigation titles={titles} />} */}
       {props.blok.body &&
         props.blok.body.map(blok =>
           React.createElement(Components(blok.component), {

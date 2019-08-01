@@ -7,6 +7,8 @@
   height: 100vh;
   padding: #{$unit * 4}px;
   margin: 0 0 $margins__page-blocks--narrow;
+
+  z-index: 3;
 }
 
 @include media('>=wide') {
