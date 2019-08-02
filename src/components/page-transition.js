@@ -64,7 +64,9 @@ export default function PageTransition({children, path}) {
   }
 
   function onEnter() {
-    wrapper.current.style.display = 'none';
+    wrapper.current.style.position = 'absolute';
+    wrapper.current.style.width = '100%';
+    wrapper.current.style.opacity = '0';
   }
 
   function onEntering() {
@@ -93,7 +95,7 @@ export default function PageTransition({children, path}) {
 
     // prettier-ignore
     return tl
-      .set(el, {display: '', opacity: 0})
+      .set(el, {position: '', width: '', opacity: 0})
       .to(el, speed.enter, {opacity: '1', ease: ease});
   }
 }

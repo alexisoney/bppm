@@ -73,10 +73,16 @@ export default props => {
     }
   }, [isOpen]);
 
+  let logoURL;
+  logoURL = props.blok.navigations_items.filter(item => item.isLogo)[0];
+  logoURL = logoURL && logoURL.link.linktype === 'story' ? logoURL.link.cached_url : '';
+
   return (
     <nav className='navigation' ref={wrapper}>
       <div className='navigation__background' />
-      <img className='navigation__logo' src={logoSVG} alt='BPPM' ref={logo} />
+      <Link className='navigation__logo' ref={logo} to={`/${logoURL ? logoURL : ''}`}>
+        <img className='navigation__logo-image' src={logoSVG} alt='BPPM' />
+      </Link>
       <div className='navigation__button' onClick={toggleNavigation}>
         <span className='navigation__button-open'>
           <img alt='Menu' src={menuIcon} />
@@ -87,6 +93,7 @@ export default props => {
       </div>
       <ul className='navigation__items' ref={items}>
         {props.blok.navigations_items.map(item => {
+          if (item.isLogo) return null;
           if (item.component !== 'link' && item.link.linktype !== 'story') return null;
           return (
             <SbEditable key={item._uid} content={item}>

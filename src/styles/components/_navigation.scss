@@ -46,15 +46,20 @@
   display: block;
 
   height: #{$unit * 4}px;
-  width: auto;
 
   margin: auto;
   margin-left: 0;
   padding: 0 #{$unit * 4}px;
 }
 
+.navigation__logo-image {
+  display: block;
+  height: 100%;
+}
+
 .navigation--small .navigation__logo {
   height: #{$unit * 2}px;
+  width: 0;
 
   margin: #{$unit * 3}px 0;
   padding-left: #{$unit * 2}px;
