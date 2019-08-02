@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Link} from 'gatsby';
+import path from 'path';
 import SbEditable from 'storyblok-react';
 
 import logoSVG from '../../assets/logo.svg';
@@ -9,12 +10,17 @@ import closeIcon from '../../assets/icon_close.svg';
 export default props => {
   if (!props.blok.navigations_items) return null;
 
-  const wrapper = useRef();
-  const logo = useRef();
   const items = useRef();
+  const logo = useRef();
+  const wrapper = useRef();
 
-  const [wrapperWidth, setWrapperWidth] = useState();
+  const [isOpen, setIsOpen] = useState(false);
   const [navigationWidth, setNavigationWidth] = useState();
+  const [wrapperWidth, setWrapperWidth] = useState();
+
+  let logoURL;
+  logoURL = props.blok.navigations_items.filter(item => item.isLogo)[0];
+  logoURL = logoURL && logoURL.link.linktype === 'story' ? logoURL.link.cached_url : '';
 
   useEffect(() => {
     setNavigationWidth(getNavigationWidth());
@@ -39,12 +45,15 @@ export default props => {
     }
   }, [wrapperWidth]);
 
-  function getWrapperWidth() {
+  useEffect(() => {
     if (wrapper.current) {
-      return window.innerWidth * 0.8;
+      if (isOpen) {
+        wrapper.current.classList.add('navigation--open');
+      } else {
+        wrapper.current.classList.remove('navigation--open');
+      }
     }
-    return null;
-  }
+  }, [isOpen]);
 
   function getNavigationWidth() {
     let width = 0;
@@ -57,30 +66,21 @@ export default props => {
     return width;
   }
 
-  const [isOpen, setIsOpen] = useState(false);
+  function getWrapperWidth() {
+    if (wrapper.current) {
+      return window.innerWidth * 0.8;
+    }
+    return null;
+  }
 
   function toggleNavigation() {
     setIsOpen(state => !state);
   }
 
-  useEffect(() => {
-    if (wrapper.current) {
-      if (isOpen) {
-        wrapper.current.classList.add('navigation--open');
-      } else {
-        wrapper.current.classList.remove('navigation--open');
-      }
-    }
-  }, [isOpen]);
-
-  let logoURL;
-  logoURL = props.blok.navigations_items.filter(item => item.isLogo)[0];
-  logoURL = logoURL && logoURL.link.linktype === 'story' ? logoURL.link.cached_url : '';
-
   return (
     <nav className='navigation' ref={wrapper}>
       <div className='navigation__background' />
-      <Link className='navigation__logo' ref={logo} to={`/${logoURL ? logoURL : ''}`}>
+      <Link className='navigation__logo' ref={logo} to={path.normalize(`/${logoURL ? logoURL : ''}/`)}>
         <img className='navigation__logo-image' src={logoSVG} alt='BPPM' />
       </Link>
       <div className='navigation__button' onClick={toggleNavigation}>
@@ -100,7 +100,7 @@ export default props => {
               <li className='navigation__item'>
                 <Link
                   className='navigation__link'
-                  to={`/${item.link.cached_url}`}
+                  to={path.normalize(`/${item.link.cached_url}/`)}
                   activeClassName='navigation__link--active'
                 >
                   {item.text}

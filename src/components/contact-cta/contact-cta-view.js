@@ -1,9 +1,11 @@
 import React from 'react';
+import path from 'path';
 
 import Button from '../button';
 
 export default props => {
-  const {catchline, cta, link} = props.blok;
+  const {catchline, cta} = props.blok;
+  const link = path.normalize(`/${props.blok.link}/`);
 
   return (
     <div className='contact-cta'>

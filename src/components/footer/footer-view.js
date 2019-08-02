@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'gatsby';
+import path from 'path';
 
 import logoSVG from '../../assets/logo_white.svg';
 
@@ -14,7 +15,7 @@ export default props => {
           if (item.component !== 'link' && item.link.linktype !== 'story') return null;
           return (
             <li key={item._uid} className='footer__item'>
-              <Link className='footer__link' to={`/${item.link.cached_url}`}>
+              <Link className='footer__link' to={path.normalize(`/${item.link.cached_url}/`)}>
                 {item.text}
               </Link>
             </li>

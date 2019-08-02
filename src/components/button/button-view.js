@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'gatsby';
+import path from 'path';
 import SbEditable from 'storyblok-react';
 
 export default props => {
@@ -15,7 +16,7 @@ export default props => {
       if (props.link && props.link.linktype === 'story') {
         return (
           <SbEditable content={props.blok}>
-            <Link className='button' to={url}>
+            <Link className='button' to={path.normalize(`/${url}/`)}>
               {props.blok.text}
             </Link>
           </SbEditable>
@@ -37,7 +38,7 @@ export default props => {
   if (props.link) {
     if (props.link.linktype === 'story') {
       return (
-        <Link className='button' to={`/${props.link.cached_url}`}>
+        <Link className='button' to={path.normalize(`/${props.link.cached_url}/`)}>
           {props.children}
         </Link>
       );
