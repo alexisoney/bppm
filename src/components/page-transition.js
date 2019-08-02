@@ -39,6 +39,7 @@ export default function PageTransition({children, path}) {
           exit: speed.exit * 1000,
           enter: (speed.loading + speed.enter) * 1000,
         }}
+        appear
         onExiting={onExiting}
         onEnter={onEnter}
         onEntering={onEntering}
