@@ -18,6 +18,12 @@ body {
   -webkit-font-smoothing: antialiased;
 
   scroll-behavior: smooth;
+
+  background-color: #222;
+}
+
+.page-transition__children {
+  background-color: $colors__omega;
 }
 
 h1,

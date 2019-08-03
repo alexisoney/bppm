@@ -3,7 +3,7 @@ import {TweenLite, TimelineLite, Power2} from 'gsap';
 import Lottie from 'lottie-react-web';
 import {TransitionGroup, Transition} from 'react-transition-group';
 
-import animation from './animation.json';
+import animation from '../assets/arrows_loader_02.json';
 
 const styles = {
   loader: {
@@ -25,7 +25,7 @@ export default function PageTransition({children, path}) {
     exit: 0.8,
     enter: 0.8,
     loader: 0.25,
-    loading: 1.2,
+    loading: 2,
     overlap: 0.5,
   };
 
@@ -53,7 +53,9 @@ export default function PageTransition({children, path}) {
               options={{animationData: animation, autoplay: false, loop: false}}
             />
           </div>
-          <div ref={wrapper}>{children}</div>
+          <div className='page-transition__children' ref={wrapper}>
+            {children}
+          </div>
         </>
       </Transition>
     </TransitionGroup>

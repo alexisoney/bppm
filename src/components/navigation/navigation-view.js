@@ -103,6 +103,8 @@ export default props => {
                   to={path.normalize(`/${item.link.cached_url}/`)}
                   activeClassName='navigation__link--active'
                 >
+                  <div className='navigation__link-background navigation__link-background--hover' />
+                  <div className='navigation__link-background navigation__link-background--active' />
                   {item.text}
                 </Link>
               </li>
