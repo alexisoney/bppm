@@ -1,4 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
+import {TimelineLite, Power2} from 'gsap';
+import {Transition, TransitionGroup} from 'react-transition-group';
 import SbEditable from 'storyblok-react';
 
 import {breakpoints} from '../../variables';
@@ -7,22 +9,6 @@ export default props => {
   const [active, setActive] = useState(props.blok.items[0]);
   const [windowWidth, setWindowWidth] = useState(getWindowWidth());
   const items = useRef();
-
-  function getWindowWidth() {
-    if (typeof window !== 'undefined') {
-      return window.innerWidth;
-    } else {
-      return null;
-    }
-  }
-
-  function handleClick(item) {
-    setActive(item);
-    if (windowWidth < breakpoints.wide && items.current) {
-      const clickedIndex = props.blok.items.findIndex(i => i._uid === item._uid);
-      items.current.style.transform = `translateX(${-50 * (clickedIndex - 1)}vw)`;
-    }
-  }
 
   useEffect(() => {
     function handleResize() {
@@ -44,6 +30,44 @@ export default props => {
     }
   }, [windowWidth]);
 
+  function contentExit(el) {
+    const tl = new TimelineLite();
+    const title = el.querySelectorAll('div, p')[0];
+    const text = el.querySelectorAll('div, p')[1];
+
+    tl.set(el, {position: 'absolute', bottom: 0, left: 0, width: '100%'})
+      .to(title, 0.4, {y: '-50%', opacity: 0, ease: Power2.easeInOut})
+      .to(text, 0.4, {y: '-50%', opacity: 0, ease: Power2.easeInOut}, '-=0.2');
+  }
+
+  function contentEnter(el) {
+    const tl = new TimelineLite();
+    const title = el.querySelectorAll('div, p')[0];
+    const text = el.querySelectorAll('div, p')[1];
+
+    tl.set(el, {visibility: 'hidden'})
+      .set([title, text], {y: '50%', opacity: 0})
+      .set(el, {visibility: ''}, 0.3)
+      .to(title, 0.4, {y: '0%', opacity: 1, ease: Power2.easeInOut})
+      .to(text, 0.4, {y: '0%', opacity: 1, ease: Power2.easeInOut}, '-=0.2');
+  }
+
+  function getWindowWidth() {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth;
+    } else {
+      return null;
+    }
+  }
+
+  function handleClick(item) {
+    setActive(item);
+    if (windowWidth < breakpoints.wide && items.current) {
+      const clickedIndex = props.blok.items.findIndex(i => i._uid === item._uid);
+      items.current.style.transform = `translateX(${-50 * (clickedIndex - 1)}vw)`;
+    }
+  }
+
   return (
     <SbEditable content={props.blok}>
       <section className='list-dots'>
@@ -56,8 +80,10 @@ export default props => {
               <li className={itemClassName} key={item._uid} onClick={() => handleClick(item)}>
                 {item.title}
                 <div className='list-dots__icon-container'>
+                  <div className='list-dots__icon-container-border' />
                   <div className='list-dots__icon'>
-                    <img className='list-dots__icon-svg' src={item.icon} />
+                    <div className='list-dots__icon-background' />
+                    <img className='list-dots__icon-svg' src={item.icon} alt='' />
                   </div>
                 </div>
               </li>
@@ -65,13 +91,28 @@ export default props => {
           })}
           <div className='list-dots__background-line' />
         </ul>
-        <div className='list-dots__content'>
-          <div>
-            <h1 className='list-dots__content-title'>{active.title}</h1>
-            <hr className='list-dots__content-divider' />
-          </div>
-          <p className='list-dots__content-text'>{active.text}</p>
-        </div>
+        <TransitionGroup className='list-dots__content-container'>
+          {props.blok.items.map(item => {
+            if (item._uid !== active._uid) return null;
+
+            return (
+              <Transition
+                key={item._uid}
+                timeout={{exit: 400, enter: 700}}
+                onExit={el => contentExit(el)}
+                onEnter={el => contentEnter(el)}
+              >
+                <div className='list-dots__content'>
+                  <div>
+                    <h1 className='list-dots__content-title'>{item.title}</h1>
+                    <hr className='list-dots__content-divider' />
+                  </div>
+                  <p className='list-dots__content-text'>{item.text}</p>
+                </div>
+              </Transition>
+            );
+          })}
+        </TransitionGroup>
       </section>
     </SbEditable>
   );

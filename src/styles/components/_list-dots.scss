@@ -51,18 +51,6 @@
   z-index: -1;
 }
 
-.list-dots__icon-container {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-
-  width: 124px;
-  height: 124px;
-  margin-top: #{$unit * 2}px;
-
-  border-radius: 100%;
-}
-
 @include media('<wide') {
   .list-dots__item {
     box-sizing: content-box;
@@ -84,11 +72,40 @@
   }
 }
 
-.list-dots__item--active .list-dots__icon-container {
+.list-dots__icon-container {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+
+  width: 124px;
+  height: 124px;
+  margin-top: #{$unit * 2}px;
+
+  border-radius: 100%;
+}
+
+.list-dots__icon-container-border {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 96px;
+  height: 96px;
+
   border: 1px solid $colors__alpha;
+  border-radius: 100%;
+}
+
+.list-dots__item--active .list-dots__icon-container-border {
+  width: 100%;
+  height: 100%;
+  transition: all 200ms ease-in-out 500ms;
 }
 
 .list-dots__icon {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,24 +122,50 @@
   overflow: hidden;
 
   &:hover {
-    background-color: $colors__alpha;
+    background-size: 100% 100%;
+
     cursor: pointer;
   }
 }
 
-.list-dots__item--active .list-dots__icon {
-  background-color: $colors__alpha;
-}
-
 .list-dots__icon-svg {
+  position: relative;
   display: block;
 
   max-width: 32px;
   max-height: 32px;
+
+  transition: filter 250ms ease-in-out;
 }
 
-.list-dots__item--active .list-dots__icon-svg {
+.list-dots__item--active .list-dots__icon-svg,
+.list-dots__icon:hover .list-dots__icon-svg {
   filter: invert(1);
+}
+
+.list-dots__icon-background {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 0%;
+  height: 0%;
+
+  border-radius: 100%;
+  background-color: $colors__alpha;
+
+  transition: all 250ms ease-in-out;
+}
+
+.list-dots__item--active .list-dots__icon-background,
+.list-dots__icon:hover .list-dots__icon-background {
+  width: 100%;
+  height: 100%;
+}
+
+.list-dots__content-container {
+  position: relative;
 }
 
 .list-dots__content {

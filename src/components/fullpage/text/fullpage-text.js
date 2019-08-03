@@ -4,12 +4,13 @@ import {getFluidGatsbyImage} from 'gatsby-storyblok-image';
 import PropTypes from 'prop-types';
 
 import Button from '../../button';
-import Footer from '../../footer';
+// import Footer from '../../footer';
 import {createNumber} from '../utils';
 import {markdownToHTML} from '../../../utils';
 
 const Text = props => {
-  const {align, background, footer, cta, index, isLast, link} = props;
+  const {align, background, cta, index, isLast, link} = props;
+  // const {footer} = props;
 
   let componentClassName = 'fullpage-text';
   componentClassName += align[0] ? ` fullpage-text--${align[0]}` : '';
