@@ -146,8 +146,15 @@
   text-decoration: none;
   text-transform: uppercase;
 
-  &:hover {
-    background-color: $colors__alpha;
+  background-image: linear-gradient($colors__gamma, $colors__gamma);
+  background-position: 0% 50%;
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+
+  transition: background-size 300ms ease-in-out;
+
+  &:not(.navigation__link--active):hover {
+    background-size: 100% 100%;
     cursor: pointer;
   }
 }
