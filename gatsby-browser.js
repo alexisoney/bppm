@@ -8,4 +8,6 @@ import React from 'react';
 
 import PageTransition from './src/components/page-transition';
 
-export const wrapPageElement = ({element, props}) => <PageTransition path={props.path}>{element}</PageTransition>;
+export const wrapPageElement = ({element, props}) => {
+  return <PageTransition path={props.path}>{element}</PageTransition>;
+};

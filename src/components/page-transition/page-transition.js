@@ -3,21 +3,17 @@ import {TweenLite, TimelineLite, Power2} from 'gsap';
 import Lottie from 'lottie-react-web';
 import {TransitionGroup, Transition} from 'react-transition-group';
 
-import animation from '../assets/arrows_loader_02.json';
+import animation from '../../assets/arrows_loader.json';
+import animationLogo from '../../assets/logo_intro.json';
 
-const styles = {
-  loader: {
-    opacity: 0,
-    position: 'absolute',
-    left: '50%',
-    top: '50%',
-    transform: 'translate(-50%,-50%)',
-  },
-};
+export const PageTransitionContext = React.createContext();
 
 export default function PageTransition({children, path}) {
+  const [appeared, setAppeared] = useState(false);
+  const [toggleIntro, setToggleIntro] = useState(false);
   const [toggleLoader, setToggleLoader] = useState(false);
 
+  const intro = createRef();
   const loader = createRef();
   const wrapper = createRef();
 
@@ -28,7 +24,6 @@ export default function PageTransition({children, path}) {
     loading: 2,
     overlap: 0.5,
   };
-
   const ease = Power2.easeInOut;
 
   return (
@@ -45,16 +40,25 @@ export default function PageTransition({children, path}) {
         onEntering={onEntering}
       >
         <>
-          <div ref={loader} style={styles.loader}>
+          {!appeared && (
+            <div ref={intro} className='page-transition__intro'>
+              <Lottie
+                width='100vw'
+                height='100vh'
+                isPaused={!toggleIntro}
+                options={{animationData: animationLogo, autoplay: false, loop: false}}
+              />
+            </div>
+          )}
+          <div ref={loader} className='page-transition__loader'>
             <Lottie
               width={200}
-              speed={1.4}
               isPaused={!toggleLoader}
               options={{animationData: animation, autoplay: false, loop: false}}
             />
           </div>
           <div className='page-transition__children' ref={wrapper}>
-            {children}
+            <PageTransitionContext.Provider value={{appeared: appeared}}>{children}</PageTransitionContext.Provider>
           </div>
         </>
       </Transition>
@@ -74,12 +78,23 @@ export default function PageTransition({children, path}) {
 
   function onEntering() {
     const tl = new TimelineLite();
-    tl.delay(speed.exit)
-      .add(displayLoader(), `-=${speed.overlap}`)
-      .add(displayPage(), `-=${speed.overlap}`);
+
+    if (!appeared) {
+      // prettier-ignore
+      tl.delay(0.4)
+        .call(setToggleIntro, [true])
+        .add(displayPage())
+        .to(intro.current, 0.6, {height: '0vh', ease: Power2.easeInOut}, 4.2)
+        .call(setAppeared,[true])
+    } else {
+      tl.delay(speed.exit)
+        .add(displayLoader(), `-=${speed.overlap}`)
+        .add(displayPage(), `-=${speed.overlap}`);
+    }
   }
 
   // GSAP Timelines
+
   function displayLoader() {
     const el = loader.current;
     const tl = new TimelineLite();

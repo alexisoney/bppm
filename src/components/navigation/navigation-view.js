@@ -1,10 +1,11 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState, useContext} from 'react';
 import {Link} from 'gatsby';
 import path from 'path';
 import SbEditable from 'storyblok-react';
 
 import logoSVG from '../../assets/logo.svg';
 import menuIcon from '../../assets/icon_menu.svg';
+import {PageTransitionContext} from '../page-transition/page-transition';
 import closeIcon from '../../assets/icon_close.svg';
 
 export default props => {
@@ -14,6 +15,7 @@ export default props => {
   const logo = useRef();
   const wrapper = useRef();
 
+  const {appeared} = useContext(PageTransitionContext);
   const [isOpen, setIsOpen] = useState(false);
   const [navigationWidth, setNavigationWidth] = useState();
   const [wrapperWidth, setWrapperWidth] = useState();
@@ -78,7 +80,7 @@ export default props => {
   }
 
   return (
-    <nav className='navigation' ref={wrapper}>
+    <nav className={`navigation ${appeared ? 'navigation--appeared' : ''}`} ref={wrapper}>
       <div className='navigation__background' />
       <Link className='navigation__logo' ref={logo} to={path.normalize(`/${logoURL ? logoURL : ''}/`)}>
         <img className='navigation__logo-image' src={logoSVG} alt='BPPM' />
@@ -112,6 +114,8 @@ export default props => {
           );
         })}
       </ul>
+      <div className='navigation__overlay navigation__overlay-one' />
+      <div className='navigation__overlay navigation__overlay-two' />
     </nav>
   );
 };
