@@ -2,24 +2,34 @@ import React, {useState} from 'react';
 import ReactFullpage from '@fullpage/react-fullpage';
 import SbEditable from 'storyblok-react';
 
+import Center from './center';
 import Footer from '../footer';
 import FullpageNavigation from './navigation';
+import Grid from './grid';
+import Left from './left';
+import Right from './right';
 import SiteNavigation from '../navigation';
 import Text from './text';
 import Video from './video';
 
-const sectionsClassName = 'fullpage__section';
+const ComponentList = {
+  'fullpage-center': Center,
+  'fullpage-grid': Grid,
+  'fullpage-left': Left,
+  'fullpage-right': Right,
+  'fullpage-text': Text,
+  'fullpage-video': Video,
+};
 
 export default props => {
-  const [fullpageApi, setFullpageApi] = useState(null);
+  const sectionsClassName = 'fullpage__section';
+
+  const sections = props.blok.sections.filter(section => {
+    return typeof ComponentList[section.component] !== 'undefined' ? section : null;
+  });
+
   const [active, setActive] = useState(0);
-
-  const sections = props.blok.sections.filter(section => (section.component === 'fullpage__section' ? section : null));
-
-  // eslint-disable-next-line
-  function onLeave(origin, destination, direction) {
-    setActive(destination.index);
-  }
+  const [fullpageApi, setFullpageApi] = useState(null);
 
   return (
     <>
@@ -29,28 +39,28 @@ export default props => {
         sectionSelector={`.${sectionsClassName}`}
         sectionsColor={[]}
         licenseKey={'YOUR_KEY_HERE'} // Get one from https://alvarotrigo.com/fullPage/pricing/
-        responsiveWidth={1200}
-        // responsiveHeight={1000}
+        responsiveWidth={1080}
         onLeave={onLeave}
+        scrollBar
         render={comp => {
           setFullpageApi(comp.fullpageApi);
           return (
             <ReactFullpage.Wrapper>
               {sections.map((section, index) => {
-                const isFirst = index === 0;
-                const isLast = index === sections.length - 1;
+                const {title, text, button, link, image, images, video} = section;
 
-                let sectionClassName = sectionsClassName;
-                sectionClassName += !section.video && !section.background ? ' fp-auto-height' : '';
-                // sectionClassName += !section.video && !section.background && !isLast ? ' fp-auto-height' : '';
+                let className = sectionsClassName;
+                className += section.component === 'fullpage-text' ? ' fp-auto-height' : '';
 
                 return (
                   <SbEditable key={section._uid} content={section}>
-                    <div className={sectionClassName}>
-                      {isFirst && <SiteNavigation blok={props.navigation} />}
-                      {section.video && <Video {...section} />}
-                      {!section.video && <Text {...section} index={index} isLast={isLast} footer={props.navigation} />}
-                      {/* {isLast && <Footer className={``} blok={props.navigation} />} */}
+                    <div className={className}>
+                      {index === 0 && <SiteNavigation blok={props.navigation} />}
+                      {// prettier-ignore
+                      React.createElement(
+                        ComponentList[section.component],
+                        {index, title, text, button, link, image, images, video}
+                      )}
                     </div>
                   </SbEditable>
                 );
@@ -62,4 +72,9 @@ export default props => {
       />
     </>
   );
+
+  // eslint-disable-next-line
+  function onLeave(origin, destination, direction) {
+    setActive(destination);
+  }
 };

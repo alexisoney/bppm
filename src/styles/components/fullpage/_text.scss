@@ -1,0 +1,22 @@
+// Variables
+$fullpage-text--center: '.fullpage-text:not(.fullpage-text--right):not(.fullpage-text--left)';
+
+// Component
+.fullpage-text {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  padding: #{$unit * 12}px 0;
+}
+
+@include media('>=wide') {
+  .fullpage-text {
+    align-items: flex-start;
+
+    width: 70%;
+    margin: 0 auto;
+  }
+}

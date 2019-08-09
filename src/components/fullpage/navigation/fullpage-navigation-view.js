@@ -7,7 +7,11 @@ export default ({fullpageApi, sections, active}) => {
   const {moveTo} = fullpageApi;
 
   let darkBackground = false;
-  if (sections[active] && !sections[active].align[0] && sections[active].background) {
+  if (
+    active &&
+    (active.isLast ||
+      (sections[active.index] && ['fullpage-grid', 'fullpage-center'].includes(sections[active.index].component)))
+  ) {
     darkBackground = true;
   }
 
@@ -15,16 +19,24 @@ export default ({fullpageApi, sections, active}) => {
   itemsClassName = 'fullpage-navigation__items';
   itemsClassName += darkBackground ? ' fullpage-navigation__items--light' : '';
 
+  let wrapperStyle = {};
+  if (active.item) {
+    wrapperStyle = {
+      position: 'absolute',
+      top: `${active.item.offsetTop + active.item.offsetHeight / 2}px`,
+    };
+  }
+
   return (
-    <div className='fullpage-navigation'>
+    <div className='fullpage-navigation' style={wrapperStyle}>
       <ul className={itemsClassName}>
         {sections.map((section, index) => {
-          const isActive = index === active;
-          const showFooter = active === sections.length && index === sections.length - 1;
+          const isActive = index === active.index;
+          const showFooter = active.index === sections.length && index === sections.length - 1;
 
           let itemClassName;
           itemClassName = 'fullpage-navigation__item';
-          itemClassName += isActive || showFooter ? ' fullpage-navigation__item--active' : '';
+          itemClassName += isActive ? ' fullpage-navigation__item--active' : '';
 
           return (
             <li key={section._uid} className={itemClassName} onClick={() => moveTo(index + 1)}>

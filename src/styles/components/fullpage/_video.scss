@@ -1,5 +1,5 @@
 // Headline
-.fullpage-video__headline {
+.fullpage-video__title {
   position: relative;
 
   padding: 0 #{$unit * 2}px;
@@ -9,12 +9,13 @@
   font-size: 32px;
 }
 
-@include media('>=wide') {
-  .fullpage-video__headline {
+@include media('>=medium') {
+  .fullpage-video__title {
     margin-left: 10%;
     max-width: 60%;
 
     font-size: 64px;
+    line-height: 92px;
   }
 }
 
@@ -26,8 +27,6 @@
 
   width: 100%;
   height: 100%;
-
-  z-index: -1;
 }
 
 // Video

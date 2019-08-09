@@ -2,6 +2,7 @@
   display: block;
   padding: #{$unit * 2.5}px #{$unit * 3}px;
   width: 264px;
+  max-width: 100%;
 
   background-color: $colors__alpha;
 
@@ -10,6 +11,8 @@
   letter-spacing: 0.05em;
   text-align: center;
   text-transform: uppercase;
+
+  overflow: hidden;
 
   &:hover {
     cursor: pointer;
