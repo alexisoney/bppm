@@ -32,7 +32,6 @@ export default ({fullpageApi, sections, active}) => {
       <ul className={itemsClassName}>
         {sections.map((section, index) => {
           const isActive = index === active.index;
-          const showFooter = active.index === sections.length && index === sections.length - 1;
 
           let itemClassName;
           itemClassName = 'fullpage-navigation__item';

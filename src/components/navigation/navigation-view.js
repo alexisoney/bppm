@@ -3,7 +3,7 @@ import {Link} from 'gatsby';
 import path from 'path';
 import SbEditable from 'storyblok-react';
 
-import logoSVG from '../../assets/logo.svg';
+import LogoSVG from '../../assets/logo';
 import menuIcon from '../../assets/icon_menu.svg';
 import {PageTransitionContext} from '../page-transition/page-transition';
 import closeIcon from '../../assets/icon_close.svg';
@@ -29,12 +29,30 @@ export default props => {
     setWrapperWidth(getWrapperWidth());
 
     function handleResize() {
-      setWrapperWidth(getWrapperWidth());
+      window.requestAnimationFrame(() => {
+        setWrapperWidth(getWrapperWidth());
+      });
     }
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    if (wrapper.current) {
+      wrapper.current.classList.add('navigation--appeared');
+    }
+  }, [appeared]);
+
+  useEffect(() => {
+    if (wrapper.current) {
+      if (isOpen) {
+        wrapper.current.classList.add('navigation--open');
+      } else {
+        wrapper.current.classList.remove('navigation--open');
+      }
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (wrapper.current) {
@@ -47,43 +65,11 @@ export default props => {
     }
   }, [wrapperWidth]);
 
-  useEffect(() => {
-    if (wrapper.current) {
-      if (isOpen) {
-        wrapper.current.classList.add('navigation--open');
-      } else {
-        wrapper.current.classList.remove('navigation--open');
-      }
-    }
-  }, [isOpen]);
-
-  function getNavigationWidth() {
-    let width = 0;
-    if (items.current) {
-      items.current.querySelectorAll('.navigation__item').forEach(item => {
-        width = width + item.offsetWidth;
-      });
-    }
-    if (logo.current) width = width + logo.current.offsetWidth;
-    return width;
-  }
-
-  function getWrapperWidth() {
-    if (wrapper.current) {
-      return window.innerWidth * 0.8;
-    }
-    return null;
-  }
-
-  function toggleNavigation() {
-    setIsOpen(state => !state);
-  }
-
   return (
-    <nav className={`navigation ${appeared ? 'navigation--appeared' : ''}`} ref={wrapper}>
+    <nav className='navigation' ref={wrapper}>
       <div className='navigation__background' />
       <Link className='navigation__logo' ref={logo} to={path.normalize(`/${logoURL ? logoURL : ''}/`)}>
-        <img className='navigation__logo-image' src={logoSVG} alt='BPPM' />
+        <LogoSVG className='navigation__logo-image' />
       </Link>
       <div className='navigation__button' onClick={toggleNavigation}>
         <span className='navigation__button-open'>
@@ -114,8 +100,33 @@ export default props => {
           );
         })}
       </ul>
-      <div className='navigation__overlay navigation__overlay-one' />
-      <div className='navigation__overlay navigation__overlay-two' />
+      {/* <div className='navigation__overlay navigation__overlay-one' />
+      <div className='navigation__overlay navigation__overlay-two' /> */}
     </nav>
   );
+
+  function getNavigationWidth() {
+    if (!items.current && !logo.current) return null;
+
+    let width = 0;
+
+    items.current.querySelectorAll('.navigation__item').forEach(item => {
+      width = width + item.offsetWidth;
+    });
+
+    width = width + logo.current.offsetWidth;
+
+    return width;
+  }
+
+  function getWrapperWidth() {
+    if (wrapper.current) {
+      return window.innerWidth * 0.8; // Because set as 80% in CSS
+    }
+    return null;
+  }
+
+  function toggleNavigation() {
+    setIsOpen(state => !state);
+  }
 };
