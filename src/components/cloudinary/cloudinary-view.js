@@ -11,7 +11,9 @@ export const Img = props => {
     const parameters = props.parameters ? props.parameters.toString() : '';
     const sizes = props.sizes || '100vw';
 
-    let webpSet, jpgSet, defaultSrc;
+    let webpSet = '';
+    let jpgSet = '';
+    let defaultSrc = '';
 
     breakpoints.forEach((size, index) => {
       webpSet += getURL(fileName, 'webp', size, parameters);

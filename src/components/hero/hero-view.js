@@ -1,20 +1,17 @@
 import React from 'react';
-import Img from 'gatsby-image';
-import {getFluidGatsbyImage} from 'gatsby-storyblok-image';
 import SbEditable from 'storyblok-react';
 
 import arrows from '../../assets/arrows_red.svg';
+import {Img} from '../cloudinary';
 
 export default props => {
   const {title, image, anchors} = props.blok;
-
-  const imgFluid = getFluidGatsbyImage(image, {maxWidth: 3840});
 
   return (
     <SbEditable content={props.blok}>
       <div className='hero'>
         <div className='hero__background'>
-          {imgFluid && <Img className='hero__background-image' fluid={imgFluid} />}
+          <Img className='hero__background-image' url={image} parameters='e_grayscale' />
           <img className='hero__background-arrows' alt='' src={arrows} />
         </div>
         <h1 className='hero__title'>{title}</h1>
