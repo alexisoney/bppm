@@ -1,14 +1,11 @@
 import React from 'react';
-import Img from 'gatsby-image';
-import {getFluidGatsbyImage} from 'gatsby-storyblok-image';
 import SbEditable from 'storyblok-react';
 
+import {Img} from '../cloudinary';
 import linkedinIcon from '../../assets/icon_linkedin.svg';
 
 export default props => {
   const {darkmode, description, linkedin, name, picture, strengths} = props.blok;
-
-  const imgFluid = getFluidGatsbyImage(picture, {maxWidth: 1600});
 
   return (
     <SbEditable content={props.blok}>
@@ -21,7 +18,7 @@ export default props => {
             <img className='team-member__social-icon' src={linkedinIcon} alt='Linkedin' />
           </a>
         </div>
-        {imgFluid && <Img className='team-member__picture' fluid={imgFluid} style={{position: ''}} />}
+        <Img className='team-member__picture' url={picture} />
         <ul className='team-member__strengths'>
           {strengths.map(category => (
             <li className='team-member__strength' key={category._uid}>
