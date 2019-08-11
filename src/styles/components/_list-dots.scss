@@ -47,8 +47,6 @@
   width: calc(100% - 124px);
 
   border-bottom: 1px dotted #222222;
-
-  z-index: -1;
 }
 
 @include media('<wide') {
@@ -59,11 +57,11 @@
     padding: 0 calc(25vw - 124px / 2);
   }
 
-  .list-dots__item:first-child {
+  .list-dots__item:nth-child(2) {
     padding-left: 0;
   }
 
-  .list-dots__item:nth-last-child(2) {
+  .list-dots__item:last-child {
     padding-right: 0;
   }
 
@@ -91,8 +89,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: 96px;
-  height: 96px;
+  width: 95px;
+  height: 95px;
 
   border: 1px solid $colors__alpha;
   border-radius: 100%;

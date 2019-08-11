@@ -43,7 +43,7 @@ export default function PageTransition({children, path}) {
           {!appeared && (
             <div ref={intro} className='page-transition__intro'>
               <Lottie
-                width='100vw'
+                width='100%'
                 height='100vh'
                 isPaused={!toggleIntro}
                 options={{animationData: animationLogo, autoplay: false, loop: false}}
@@ -83,9 +83,9 @@ export default function PageTransition({children, path}) {
       // prettier-ignore
       tl.delay(0.4)
         .call(setToggleIntro, [true])
-        .add(displayPage())
-        .to(intro.current, 0.6, {height: '0vh', ease: Power2.easeInOut}, 4.2)
-        .call(setAppeared,[true])
+      .add(displayPage())
+      .to(intro.current, 0.6, {height: '0vh', ease: Power2.easeInOut}, 4.2)
+      .call(setAppeared,[true])
     } else {
       tl.delay(speed.exit)
         .add(displayLoader(), `-=${speed.overlap}`)

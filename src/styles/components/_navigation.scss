@@ -53,8 +53,6 @@
   width: calc(100vw - #{$unit * 4 * 2}px);
   margin: #{$unit * 4}px;
   padding: 0;
-
-  overflow: auto;
 }
 
 .navigation--small.navigation--open {
@@ -74,6 +72,10 @@
 
   opacity: 0.7;
   z-index: -1;
+}
+
+.navigation--small.navigation--open .navigation__background {
+  opacity: 0.95;
 }
 
 .navigation__logo {
@@ -153,11 +155,10 @@
 .navigation--small .navigation__items {
   display: none;
   flex-flow: column nowrap;
-  align-items: flex-start;
+  justify-content: center;
 
   height: auto;
   margin: 0;
-  padding-left: #{$unit * 2}px;
 }
 
 .navigation--small.navigation--open .navigation__items {
@@ -190,8 +191,11 @@
 
 .navigation--small .navigation__link {
   margin: #{$unit * 2}px 0;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top: #{$unit * 2}px;
+  padding-bottom: #{$unit * 2}px;
+
+  font-size: 20px;
+  text-align: center;
 }
 
 .navigation__link-background {

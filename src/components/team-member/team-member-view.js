@@ -18,7 +18,7 @@ export default props => {
             <img className='team-member__social-icon' src={linkedinIcon} alt='Linkedin' />
           </a>
         </div>
-        <Img className='team-member__picture' url={picture} />
+        <Img className='team-member__picture' url={picture} sizes='(max-width: 800px) 100vw, 50vw' />
         <ul className='team-member__strengths'>
           {strengths.map(category => (
             <li className='team-member__strength' key={category._uid}>

@@ -1,56 +1,39 @@
-import React, {useState, useEffect, useRef} from 'react';
-import Img from 'gatsby-image';
-import {getFluidGatsbyImage} from 'gatsby-storyblok-image';
+import React, {useState, useRef} from 'react';
 import {TimelineLite, Power2} from 'gsap';
 import {Transition, TransitionGroup} from 'react-transition-group';
 import SbEditable from 'storyblok-react';
 
 import {breakpoints} from '../../variables';
+import {Img} from '../cloudinary';
 
 export default props => {
   const [active, setActive] = useState(props.blok.items[0]);
-  const [imgFluid, setImgFluid] = useState();
 
   const contentTitle = useRef();
 
   let componentClassName = 'list-panel';
   componentClassName += props.blok.reverse ? ' list-panel--right' : '';
 
-  useEffect(() => {
-    if (active) {
-      if (active.image) {
-        setImgFluid(getFluidGatsbyImage(active.image, {maxWidth: 500}));
-      } else {
-        setImgFluid(null);
-      }
-    }
-  }, [active]);
-
-  function contentExit(el) {
-    const tl = new TimelineLite();
-    // prettier-ignore
-    tl.to(el, 0.4, {y: '-50%', opacity: 0, ease: Power2.easeInOut});
-  }
-
-  function contentEnter(el) {
-    const tl = new TimelineLite();
-    // prettier-ignore
-    tl.set(el, {y: '50%', display: 'none', opacity: 0})
-      .set(el, {display: ''}, 0.4)
-      .to(el, 0.4, {y: '0%', opacity: 1, ease: Power2.easeInOut});
-  }
-
-  function handleClick(item) {
-    setActive(item);
-    if (contentTitle.current && window.innerWidth < breakpoints.wide) {
-      setTimeout(() => contentTitle.current.scrollIntoView(), 400);
-    }
-  }
-
   return (
     <SbEditable content={props.blok}>
       <section className={componentClassName}>
-        {imgFluid && <Img className='list-panel__image' fluid={imgFluid} style={{position: ''}} />}
+        <TransitionGroup className='list-panel__image-container'>
+          {props.blok.items.map(item => {
+            if (item._uid !== active._uid) return null;
+
+            return (
+              <Transition
+                key={item._uid}
+                timeout={{exit: 400, enter: 700}}
+                onExit={el => imageExit(el)}
+                onEnter={el => imageEnter(el)}
+              >
+                <Img className='list-panel__image' url={item.image} sizes='(max-width: 1080px) 100vw, 50vw' />
+              </Transition>
+            );
+          })}
+        </TransitionGroup>
+
         <ul className='list-panel__titles'>
           {props.blok.items.map(item => {
             let itemClassName = 'list-panel__title';
@@ -92,4 +75,39 @@ export default props => {
       </section>
     </SbEditable>
   );
+
+  function contentEnter(el) {
+    const tl = new TimelineLite();
+    // prettier-ignore
+    tl.set(el, {y: '50%', display: 'none', opacity: 0})
+      .set(el, {display: ''}, 0.4)
+      .to(el, 0.4, {y: '0%', opacity: 1, ease: Power2.easeInOut});
+  }
+
+  function contentExit(el) {
+    const tl = new TimelineLite();
+    // prettier-ignore
+    tl.to(el, 0.4, {y: '-50%', opacity: 0, ease: Power2.easeInOut});
+  }
+
+  function imageEnter(el) {
+    const tl = new TimelineLite();
+    // prettier-ignore
+    tl.set(el, {display: 'none', scale: 0.98, opacity: 0})
+      .set(el, {display: ''}, 0.4)
+      .to(el, 0.4, {scale: 1, opacity: 1, ease: Power2.easeInOut});
+  }
+
+  function imageExit(el) {
+    const tl = new TimelineLite();
+    // prettier-ignore
+    tl.to(el, 0.4, {scale: 0.98, opacity: 0});
+  }
+
+  function handleClick(item) {
+    setActive(item);
+    if (contentTitle.current && window.innerWidth < breakpoints.wide) {
+      setTimeout(() => contentTitle.current.scrollIntoView(), 400);
+    }
+  }
 };

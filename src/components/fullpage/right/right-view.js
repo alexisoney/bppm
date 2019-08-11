@@ -26,7 +26,7 @@ right.propTypes = {
   title: PropTypes.string,
   text: PropTypes.string,
   button: PropTypes.string,
-  link: PropTypes.string,
+  link: PropTypes.object,
   image: PropTypes.string,
 };
 

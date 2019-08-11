@@ -4,8 +4,7 @@ import path from 'path';
 import Button from '../button';
 
 export default props => {
-  const {catchline, cta} = props.blok;
-  const link = path.normalize(`/${props.blok.link}/`);
+  const {catchline, cta, link} = props.blok;
 
   return (
     <div className='contact-cta'>

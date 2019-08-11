@@ -35,7 +35,7 @@ Grid.propTypes = {
   title: PropTypes.string,
   images: PropTypes.array,
   button: PropTypes.string,
-  link: PropTypes.string,
+  link: PropTypes.object,
 };
 
 export default Grid;

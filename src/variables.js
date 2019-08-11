@@ -1,5 +1,6 @@
+// WRANING: update ./styles/globals/_variables.scss accordingly
 export const breakpoints = {
-  narrow: 500,
-  medium: 768,
-  wide: 1200,
+  narrow: 600,
+  medium: 800,
+  wide: 1080,
 };

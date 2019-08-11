@@ -17,7 +17,7 @@ Center.propTypes = {
   index: PropTypes.number,
   title: PropTypes.string,
   button: PropTypes.string,
-  link: PropTypes.string,
+  link: PropTypes.object,
 };
 
 export default Center;
