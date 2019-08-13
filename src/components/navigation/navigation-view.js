@@ -39,7 +39,7 @@ export default props => {
   }, []);
 
   useEffect(() => {
-    if (wrapper.current) {
+    if (wrapper.current && appeared) {
       wrapper.current.classList.add('navigation--appeared');
     }
   }, [appeared]);
