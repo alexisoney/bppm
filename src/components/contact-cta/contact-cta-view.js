@@ -1,5 +1,4 @@
 import React from 'react';
-import path from 'path';
 
 import Button from '../button';
 

@@ -13,6 +13,7 @@ import ListPanel from './list-panel';
 import MapComponent from './map';
 import Navigation from './navigation';
 import Page from './page';
+import Story from './story';
 import TeamMember from './team-member';
 import Text from './text';
 import Title from './title';
@@ -32,6 +33,7 @@ const ComponentList = {
   listPanel: ListPanel,
   map: MapComponent,
   page: Page,
+  story: Story,
   teamMember: TeamMember,
   text: Text,
   title: Title,

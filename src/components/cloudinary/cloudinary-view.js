@@ -11,15 +11,20 @@ export const Img = props => {
     const parameters = props.parameters ? props.parameters.toString() : '';
     const sizes = props.sizes || '100vw';
 
-    let webpSet = '';
-    let jpgSet = '';
+    let webpSet = [];
+    let jpgSet = [];
     let defaultSrc = '';
 
     breakpoints.forEach((size, index) => {
-      webpSet += getURL(fileName, 'webp', size, parameters);
-      jpgSet += getURL(fileName, 'jpg', size, parameters);
+      webpSet.push(getURL(fileName, 'webp', size, parameters));
+      jpgSet.push(getURL(fileName, 'jpg', size, parameters));
 
-      if (index === 0) defaultSrc = getURL('jpg', size).split(' ')[0];
+      if (index === 0) defaultSrc = getURL(fileName, 'jpg', size, parameters).split(' ')[0];
+
+      if (index === breakpoints.length - 1) {
+        webpSet = webpSet.join();
+        jpgSet = jpgSet.join();
+      }
     });
 
     return (
@@ -42,17 +47,17 @@ export const Img = props => {
   return null;
 };
 
-function isCloudinaryURL(url) {
-  return url.split(cloudinaryURL)[1] !== undefined;
-}
-
 function getURL(fileName, ext, size, parameters) {
   const parameter = normalizeParameter(`c_fit,f_auto,q_80,w_${size},${parameters}`);
-  const url = path.normalize(`${cloudinaryURL}/${parameter}/${cloudinaryFolder}/${fileName}.${ext} ${size}w,`);
+  const url = `${cloudinaryURL}/${parameter}/${cloudinaryFolder}/${fileName}.${ext} ${size}w`;
 
   return url;
 
   function normalizeParameter(options) {
     return options.replace(/,,/g, ',').replace(/(^,|,$)/g, '');
   }
+}
+
+function isCloudinaryURL(url) {
+  return url.split(cloudinaryURL)[1] !== undefined;
 }

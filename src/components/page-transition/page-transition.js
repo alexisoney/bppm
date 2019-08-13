@@ -43,7 +43,7 @@ export default function PageTransition({children, path}) {
           {!appeared && (
             <div ref={intro} className='page-transition__intro'>
               <Lottie
-                width='100%'
+                width='340px'
                 height='100vh'
                 isPaused={!toggleIntro}
                 options={{animationData: animationLogo, autoplay: false, loop: false}}

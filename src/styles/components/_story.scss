@@ -1,0 +1,51 @@
+.story__chapter {
+  display: flex;
+
+  height: 100vh;
+}
+
+.story__illustration {
+  flex: 0 0 100%;
+
+  background-color: $colors__gamma;
+}
+
+@include media('>=wide') {
+  .story__illustration {
+    flex-basis: 50%;
+  }
+}
+
+@include media('>=wide') {
+  .story__content {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+
+    padding: #{$unit}px #{$unit * 8}px;
+  }
+}
+
+.story__title {
+  margin: 0 0 #{$unit * 4}px;
+
+  font-size: 48px;
+  line-height: 56px;
+}
+
+.story__text {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.story__text > li {
+  margin: 0 0 #{$unit * 4}px;
+  padding: 0 0 0 #{$unit * 3}px;
+
+  list-style: none;
+  background-repeat: no-repeat;
+  background-position: left #{$unit * 1}px;
+  background-size: #{$unit * 1.25}px;
+}
