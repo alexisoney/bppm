@@ -9,10 +9,16 @@
   font-size: 32px;
 }
 
+.fullpage-video__title-word {
+  display: inline-block;
+
+  padding-right: 0.3em;
+}
+
 @include media('>=medium') {
   .fullpage-video__title {
     margin-left: 10%;
-    max-width: 60%;
+    max-width: 570px;
 
     font-size: 64px;
     line-height: 92px;

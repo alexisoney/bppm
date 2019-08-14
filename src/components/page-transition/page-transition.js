@@ -10,6 +10,7 @@ export const PageTransitionContext = React.createContext();
 
 export default function PageTransition({children, path}) {
   const [appeared, setAppeared] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [toggleIntro, setToggleIntro] = useState(false);
   const [toggleLoader, setToggleLoader] = useState(false);
 
@@ -40,7 +41,7 @@ export default function PageTransition({children, path}) {
         onEntering={onEntering}
       >
         <>
-          {!appeared && (
+          {!loaded && (
             <div ref={intro} className='page-transition__intro'>
               <Lottie
                 width='340px'
@@ -79,13 +80,14 @@ export default function PageTransition({children, path}) {
   function onEntering() {
     const tl = new TimelineLite();
 
-    if (!appeared) {
+    if (!loaded) {
       // prettier-ignore
       tl.delay(0.4)
         .call(setToggleIntro, [true])
       .add(displayPage())
       .to(intro.current, 0.6, {height: '0vh', ease: Power2.easeInOut}, 4.2)
-      .call(setAppeared,[true])
+      .call(setAppeared,[true],null,'-=0.4')
+      .call(setLoaded,[true])
     } else {
       tl.delay(speed.exit)
         .add(displayLoader(), `-=${speed.overlap}`)

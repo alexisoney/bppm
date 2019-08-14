@@ -22,14 +22,13 @@ const ComponentList = {
 };
 
 export default props => {
-  const sectionsClassName = 'fullpage__section';
+  const [active, setActive] = useState(0);
+  const [fullpageApi, setFullpageApi] = useState(null);
 
+  const sectionsClassName = 'fullpage__section';
   const sections = props.blok.sections.filter(section => {
     return typeof ComponentList[section.component] !== 'undefined' ? section : null;
   });
-
-  const [active, setActive] = useState(0);
-  const [fullpageApi, setFullpageApi] = useState(null);
 
   return (
     <>
