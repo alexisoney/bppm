@@ -4,7 +4,7 @@ import {Power2, TweenMax} from 'gsap';
 import {PageTransitionContext} from '../../page-transition/page-transition';
 
 const path = 'https://res.cloudinary.com/studio-basilic-tropical/video/upload';
-const file = 'BPPM/golden-gate-bridge-drive-NCBGJZ2_xlhglm';
+const file = 'BPPM/bppm_introduction';
 
 export default props => {
   const {appeared} = useContext(PageTransitionContext);
@@ -40,8 +40,8 @@ export default props => {
       <div className='fullpage-video__container'>
         {/* <video className='fullpage-video__element' muted data-autoplay={appeared} loop data-keepplaying={appeared}> */}
         <video ref={videoElement} className='fullpage-video__element' muted loop preload='auto'>
-          <source src={`${path}/w_1920,q_80/${file}.mp4`} type='video/mp4' />
-          <source src={`${path}/w_1920,q_80/${file}.webm`} type='video/webm' />
+          <source src={`${path}/w_1440,q_80/${file}.mp4`} type='video/mp4' />
+          <source src={`${path}/w_1440,q_80/${file}.webm`} type='video/webm' />
         </video>
       </div>
       <h1 ref={titleElement} className='fullpage-video__title' dangerouslySetInnerHTML={{__html: title}} />
