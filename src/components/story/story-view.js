@@ -10,11 +10,11 @@ const Story = props => {
 
   const [playLottie, setPlayLottie] = useState(false);
 
-  const illustrationElement = useRef();
+  const element = useRef();
 
   useEffect(() => {
-    if (illustrationElement.current) {
-      const el = illustrationElement.current;
+    if (element.current) {
+      const el = element.current;
 
       const onIntersection = entries => {
         for (const entry of entries) {
@@ -23,7 +23,7 @@ const Story = props => {
           }
         }
       };
-      const observer = new IntersectionObserver(onIntersection, {threshold: 0.9});
+      const observer = new IntersectionObserver(onIntersection, {threshold: 0.1});
       observer.observe(el);
     }
   }, []);
@@ -32,18 +32,18 @@ const Story = props => {
     return null;
   }
   return (
-    <div className='story'>
+    <div ref={element} className='story'>
       {chapters.map((chapter, index) => (
         <div className='story__chapter' key={chapter._uid}>
-          <div ref={illustrationElement} className='story__illustration'>
+          <div className='story__illustration'>
             <Lottie
               isPaused={!playLottie}
-              segments={[0, 150]}
-              forceSegment
+              // segments={[0, 150]}
+              // forceSegment
               options={{
                 animationData: illustration,
                 autoplay: false,
-                loop: false,
+                loop: true,
               }}
             />
           </div>
