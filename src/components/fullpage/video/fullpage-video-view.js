@@ -38,8 +38,7 @@ export default props => {
   return (
     <>
       <div className='fullpage-video__container'>
-        {/* <video className='fullpage-video__element' muted data-autoplay={appeared} loop data-keepplaying={appeared}> */}
-        <video ref={videoElement} className='fullpage-video__element' muted loop preload='auto'>
+        <video ref={videoElement} className='fullpage-video__element' muted loop preload='auto' data-keepplaying>
           <source src={`${path}/w_1920,q_80/${file}.mp4`} type='video/mp4' />
           <source src={`${path}/w_1920,q_80/${file}.webm`} type='video/webm' />
         </video>

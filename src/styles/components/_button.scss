@@ -1,4 +1,5 @@
 .button {
+  position: relative;
   display: block;
   padding: #{$unit * 2.5}px #{$unit * 3}px;
   width: 264px;
@@ -43,5 +44,41 @@
   background-color: $colors__omega;
   border: 1px solid $colors__alpha;
 
-  color: $colors__alpha;
+  transition: color 150ms ease-in-out;
+
+  &:link:not(:hover),
+  &:visited:not(:hover),
+  &:active:not(:hover) {
+    color: $colors__alpha;
+    text-decoration: none;
+  }
+}
+
+.button__text {
+  position: relative;
+  z-index: 2;
+}
+
+.button::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-101%);
+
+  height: 100%;
+  width: 101%;
+
+  background-color: white;
+  opacity: 0.3;
+  content: '';
+  transition: transform 0.25s ease-in-out;
+}
+
+.button--outlined::after {
+  background-color: $colors__alpha;
+  opacity: 1;
+}
+
+.button:hover::after {
+  transform: translateX(0);
 }

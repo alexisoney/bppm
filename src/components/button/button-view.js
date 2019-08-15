@@ -16,16 +16,16 @@ export default props => {
       if (props.link && props.link.linktype === 'story') {
         return (
           <SbEditable content={props.blok}>
-            <Link className='button' to={path.normalize(`/${url}/`)}>
-              {props.blok.text}
+            <Link className={buttonClassName} to={path.normalize(`/${url}/`)}>
+              <span className='button__text'>{props.blok.text}</span>
             </Link>
           </SbEditable>
         );
       } else {
         return (
           <SbEditable content={props.blok}>
-            <a className='button' href={url} target='_blank' rel='noopener noreferrer'>
-              {props.blok.text}
+            <a className={buttonClassName} href={url} target='_blank' rel='noopener noreferrer'>
+              <span className='button__text'>{props.blok.text}</span>
             </a>
           </SbEditable>
         );
@@ -38,14 +38,14 @@ export default props => {
   if (props.link) {
     if (props.link.linktype === 'story') {
       return (
-        <Link className='button' to={path.normalize(`/${props.link.cached_url}/`)}>
-          {props.children}
+        <Link className={buttonClassName} to={path.normalize(`/${props.link.cached_url}/`)}>
+          <span className='button__text'>{props.children}</span>
         </Link>
       );
     } else {
       return (
-        <a className='button' href={props.link.cached_url} target='_blank' rel='noopener noreferrer'>
-          {props.children}
+        <a className={buttonClassName} href={props.link.cached_url} target='_blank' rel='noopener noreferrer'>
+          <span className='button__text'>{props.children}</span>
         </a>
       );
     }
