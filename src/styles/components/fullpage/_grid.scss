@@ -7,7 +7,7 @@
 
   height: 100%;
   max-height: 100%;
-  padding: #{$unit * 8}px 0;
+  // padding: #{$unit * 8}px 0;
 
   background-color: $colors__gamma;
 }
@@ -70,15 +70,10 @@
   opacity: 0.5;
 }
 
-.fullpage-grid__title {
-  position: relative;
+.fullpage-grid .fullpage__index {
+  margin-top: #{$unit * 8}px;
+}
 
-  font-size: 20px;
-  line-height: 40px;
-
-  margin: #{$unit * 3}px 0;
-
-  color: $colors__omega;
-  font-weight: 700;
-  text-align: center;
+.fullpage-grid .button {
+  margin-bottom: #{$unit * 8}px;
 }
