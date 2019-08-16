@@ -43,12 +43,12 @@ export default function PageTransition({children, path}) {
         <>
           {!loaded && (
             <div ref={intro} className='page-transition__intro'>
-              <Lottie
-                width='340px'
-                height='100vh'
-                isPaused={!toggleIntro}
-                options={{animationData: animationLogo, autoplay: false, loop: false}}
-              />
+              <div className='page-transition__intro-lottie'>
+                <Lottie
+                  isPaused={!toggleIntro}
+                  options={{animationData: animationLogo, autoplay: false, loop: false}}
+                />
+              </div>
             </div>
           )}
           <div ref={loader} className='page-transition__loader'>
