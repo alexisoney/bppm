@@ -26,7 +26,7 @@ export default props => {
 
   useEffect(() => {
     if (appeared && videoElement && videoElement.current) {
-      videoElement.current.play();
+      videoElement.current.play().catch(() => null);
     }
   }, [appeared]);
 
