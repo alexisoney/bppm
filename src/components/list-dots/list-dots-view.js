@@ -7,16 +7,14 @@ import {breakpoints} from '../../variables';
 
 export default props => {
   const [active, setActive] = useState(props.blok.items[0]);
-  const [windowWidth, setWindowWidth] = useState(getWindowWidth());
+  const [windowWidth, setWindowWidth] = useState(0);
   const items = useRef();
 
   useEffect(() => {
-    function handleResize() {
-      setWindowWidth(getWindowWidth());
-    }
+    getWindowWidth();
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('resize', getWindowWidth);
+    return () => window.removeEventListener('resize', getWindowWidth);
   }, []);
 
   useEffect(() => {
@@ -103,9 +101,7 @@ export default props => {
 
   function getWindowWidth() {
     if (typeof window !== 'undefined') {
-      return window.innerWidth;
-    } else {
-      return null;
+      setWindowWidth(window.innerWidth);
     }
   }
 
