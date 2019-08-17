@@ -84,10 +84,10 @@ export default function PageTransition({children, path}) {
       // prettier-ignore
       tl.delay(0.4)
         .call(setToggleIntro, [true])
-      .add(displayPage())
-      .to(intro.current, 0.6, {height: '0vh', ease: Power2.easeInOut}, 4.2)
-      .call(setAppeared,[true],null,'-=0.4')
-      .call(setLoaded,[true])
+        .add(displayPage())
+        .to(intro.current, 0.6, {height: '0vh', ease: Power2.easeInOut}, 4.2)
+        .call(setAppeared,[true],null,'-=0.2')
+        .call(setLoaded,[true])
     } else {
       tl.delay(speed.exit)
         .add(displayLoader(), `-=${speed.overlap}`)

@@ -101,7 +101,6 @@ export default props => {
         })}
       </ul>
       <div className='navigation__overlay navigation__overlay-one' />
-      <div className='navigation__overlay navigation__overlay-two' />
     </nav>
   );
 

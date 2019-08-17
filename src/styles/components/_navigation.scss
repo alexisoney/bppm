@@ -15,33 +15,36 @@
 .navigation__overlay {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
 
   width: 100%;
   height: 100%;
 
-  transition: all 800ms ease-in-out;
-}
+  transition: width 800ms ease-in-out;
 
-.navigation__overlay-one {
-  transition-duration: 600ms;
   background-color: $colors__gamma;
 }
 
-.navigation--appeared .navigation__overlay-one {
-  transform: translateX(101%);
-}
-
-.navigation__overlay-two {
-  left: unset;
-  right: 0;
-  width: 40%;
-  transform: translateX(-250%);
-  background-color: $colors__alpha;
-}
-
-.navigation--appeared .navigation__overlay-two {
+.navigation--appeared .navigation__overlay {
   width: 0%;
+}
+
+.navigation__overlay::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-101%);
+
+  height: 100%;
+  width: 40%;
+
+  transition: transform 600ms ease-in-out;
+
+  background-color: $colors__alpha;
+  content: '';
+}
+
+.navigation--appeared .navigation__overlay::after {
   transform: translateX(0%);
 }
 
