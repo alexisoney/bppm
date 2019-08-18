@@ -15,7 +15,7 @@ export default props => {
   const logo = useRef();
   const wrapper = useRef();
 
-  const {appeared} = useContext(PageTransitionContext);
+  const {appeared, navigate} = useContext(PageTransitionContext);
   const [isOpen, setIsOpen] = useState(false);
   const [navigationWidth, setNavigationWidth] = useState();
   const [wrapperWidth, setWrapperWidth] = useState();
@@ -87,6 +87,7 @@ export default props => {
             <SbEditable key={item._uid} content={item}>
               <li className='navigation__item'>
                 <Link
+                  onClick={e => navigate(e)}
                   className='navigation__link'
                   to={path.normalize(`/${item.link.cached_url}/`)}
                   activeClassName='navigation__link--active'

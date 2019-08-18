@@ -1,4 +1,5 @@
 import React, {createRef, useState} from 'react';
+import {navigate} from 'gatsby';
 import {TweenLite, TimelineLite, Power2} from 'gsap';
 import Lottie from 'lottie-react-web';
 import {TransitionGroup, Transition} from 'react-transition-group';
@@ -10,6 +11,7 @@ export const PageTransitionContext = React.createContext();
 
 export default function PageTransition({children, path}) {
   const [appeared, setAppeared] = useState(false);
+  const [canScroll, setCanScroll] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [toggleIntro, setToggleIntro] = useState(false);
   const [toggleLoader, setToggleLoader] = useState(false);
@@ -32,11 +34,10 @@ export default function PageTransition({children, path}) {
       <Transition
         key={path}
         timeout={{
-          exit: speed.exit * 1000,
+          exit: 0,
           enter: (speed.loading + speed.enter) * 1000,
         }}
         appear
-        onExiting={onExiting}
         onEnter={onEnter}
         onEntering={onEntering}
       >
@@ -59,22 +60,30 @@ export default function PageTransition({children, path}) {
             />
           </div>
           <div className='page-transition__children' ref={wrapper}>
-            <PageTransitionContext.Provider value={{appeared: appeared}}>{children}</PageTransitionContext.Provider>
+            <PageTransitionContext.Provider value={{appeared: appeared, navigate: triggerExit, canScroll: canScroll}}>
+              {children}
+            </PageTransitionContext.Provider>
           </div>
         </>
       </Transition>
     </TransitionGroup>
   );
 
-  // React Transition Group
-  function onExiting() {
-    TweenLite.to(wrapper.current, speed.exit, {opacity: 0, ease: ease});
+  function triggerExit(e) {
+    if (wrapper && wrapper.current) {
+      e.preventDefault();
+      setCanScroll(false);
+
+      const link = e.currentTarget.pathname;
+      const tl = new TimelineLite({onComplete: () => navigate(link)});
+
+      tl.to(wrapper.current, speed.exit, {opacity: 0, ease: ease});
+    }
   }
 
+  // React Transition Group
   function onEnter() {
-    wrapper.current.style.position = 'absolute';
-    wrapper.current.style.width = '100%';
-    wrapper.current.style.opacity = '0';
+    if (wrapper && wrapper.current) TweenLite.set(wrapper.current, {opacity: 0});
   }
 
   function onEntering() {
@@ -82,16 +91,19 @@ export default function PageTransition({children, path}) {
 
     if (!loaded) {
       // prettier-ignore
-      tl.delay(0.4)
+      tl
+        .delay(0.4)
         .call(setToggleIntro, [true])
         .add(displayPage())
         .to(intro.current, 0.6, {height: '0vh', ease: Power2.easeInOut}, 4.2)
         .call(setAppeared,[true],null,'-=0.2')
         .call(setLoaded,[true])
+        .call(setCanScroll,[true],null,'+=0.1');
     } else {
       tl.delay(speed.exit)
         .add(displayLoader(), `-=${speed.overlap}`)
-        .add(displayPage(), `-=${speed.overlap}`);
+        .add(displayPage(), `-=${speed.overlap}`)
+        .call(setCanScroll, [true], null, '+=0.1');
     }
   }
 

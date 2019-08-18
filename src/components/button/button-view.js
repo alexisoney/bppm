@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link} from 'gatsby';
 import path from 'path';
 import SbEditable from 'storyblok-react';
 
+import {PageTransitionContext} from '../page-transition/page-transition';
+
 export default props => {
+  const {navigate} = useContext(PageTransitionContext);
+
   let buttonClassName = 'button';
   buttonClassName += props.className ? ` ${props.className}` : '';
   buttonClassName += props.blok ? ` button--centered` : '';
@@ -16,7 +20,7 @@ export default props => {
       if (props.link && props.link.linktype === 'story') {
         return (
           <SbEditable content={props.blok}>
-            <Link className={buttonClassName} to={path.normalize(`/${url}/`)}>
+            <Link onClick={e => navigate(e)} className={buttonClassName} to={path.normalize(`/${url}/`)}>
               <span className='button__text'>{props.blok.text}</span>
             </Link>
           </SbEditable>
@@ -38,7 +42,7 @@ export default props => {
   if (props.link) {
     if (props.link.linktype === 'story') {
       return (
-        <Link className={buttonClassName} to={path.normalize(`/${props.link.cached_url}/`)}>
+        <Link onClick={e => navigate(e)} className={buttonClassName} to={path.normalize(`/${props.link.cached_url}/`)}>
           <span className='button__text'>{props.children}</span>
         </Link>
       );
