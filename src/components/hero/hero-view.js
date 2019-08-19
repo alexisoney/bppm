@@ -18,7 +18,7 @@ export default props => {
         <ul className='hero__anchors'>
           {anchors.map(anchor => (
             <li key={anchor.id} className='hero__anchor'>
-              <a onClick={e => e.preventDefault()} href={`#${anchor.link}`} className='hero__link'>
+              <a href={`#${anchor.link}`} className='hero__link'>
                 {anchor.text}
               </a>
             </li>

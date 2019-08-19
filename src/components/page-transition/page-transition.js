@@ -1,4 +1,4 @@
-import React, {createRef, useState} from 'react';
+import React, {createRef, useState, useEffect} from 'react';
 import {navigate} from 'gatsby';
 import {TweenLite, TimelineLite, Power2} from 'gsap';
 import Lottie from 'lottie-react-web';
@@ -28,6 +28,20 @@ export default function PageTransition({children, path}) {
     overlap: 0.5,
   };
   const ease = Power2.easeInOut;
+
+  // useEffect(() => {
+  //   if (window !== undefined && document !== undefined) {
+  //     document.body.style.overflow = 'hidden';
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   if (window !== undefined && document !== undefined) {
+  //     if (canScroll) {
+  //       document.body.style.overflow = '';
+  //     }
+  //   }
+  // }, [canScroll]);
 
   return (
     <TransitionGroup component={null}>
@@ -69,6 +83,10 @@ export default function PageTransition({children, path}) {
     </TransitionGroup>
   );
 
+  // function blockScroll() {
+  //   window.scrollTo(0, 0);
+  // }
+
   function triggerExit(e) {
     if (wrapper && wrapper.current) {
       e.preventDefault();
@@ -98,12 +116,12 @@ export default function PageTransition({children, path}) {
         .to(intro.current, 0.6, {height: '0vh', ease: Power2.easeInOut}, 4.2)
         .call(setAppeared,[true],null,'-=0.2')
         .call(setLoaded,[true])
-        .call(setCanScroll,[true],null,'+=0.1');
+        .call(setCanScroll,[true]);
     } else {
       tl.delay(speed.exit)
         .add(displayLoader(), `-=${speed.overlap}`)
         .add(displayPage(), `-=${speed.overlap}`)
-        .call(setCanScroll, [true], null, '+=0.1');
+        .call(setCanScroll, [true]);
     }
   }
 

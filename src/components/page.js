@@ -4,7 +4,6 @@ import Components from './components.js';
 import ContactCTA from './contact-cta';
 import Footer from './footer';
 import Navigation from './navigation';
-import SmoothScroll from './smooth-scroll';
 
 // import PageNavigation from './page-navigation';
 
@@ -39,7 +38,7 @@ const Page = props => {
   }
 
   return (
-    <SmoothScroll>
+    <>
       <Navigation blok={props.navigation} />
       {/* {titles.length > 0 && <PageNavigation titles={titles} />} */}
       {props.blok.body &&
@@ -51,7 +50,7 @@ const Page = props => {
         )}
       {!hasContactForm && <ContactCTA blok={props.contactCTA} />}
       <Footer blok={props.navigation} />
-    </SmoothScroll>
+    </>
   );
 };
 
