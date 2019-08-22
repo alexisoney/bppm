@@ -1,29 +1,60 @@
-.story__chapter {
-  display: flex;
+.story {
+  position: relative;
 
-  height: 100vh;
+  background-color: $colors__omega;
+}
+
+.story__scene {
+  position: relative;
 }
 
 .story__illustration {
-  flex: 0 0 100%;
+  display: none;
+  position: sticky;
+  top: 0;
+  left: 0;
+
+  width: 50%;
+  height: 100vh;
+  margin-bottom: -100vh;
 
   background-color: $colors__gamma;
 }
 
-@include media('>=wide') {
+@include media('<medium') {
   .story__illustration {
-    flex-basis: 50%;
+    display: block;
+    position: relative;
+
+    width: 100%;
+    height: 50vh;
+    margin-bottom: #{$unit * 4}px;
   }
 }
 
-@include media('>=wide') {
-  .story__content {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
+.story__chapter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    padding: #{$unit}px #{$unit * 8}px;
+  width: 50%;
+  margin-left: 50%;
+}
+
+@include media('<medium') {
+  .story__chapter {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: #{$unit * 4}px;
   }
+}
+
+.story__content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+
+  padding: #{$unit * 4}px #{$unit * 8}px;
 }
 
 .story__title {
@@ -48,4 +79,8 @@
   background-repeat: no-repeat;
   background-position: left #{$unit * 1}px;
   background-size: #{$unit * 1.25}px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
