@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Power2, TweenLite, TimelineLite } from 'gsap';
+import React, {useEffect, useRef} from 'react';
+import {Power2, TweenLite, TimelineLite} from 'gsap';
 import lottie from 'lottie-web';
 import ReactMarkdown from 'react-markdown';
 
 import arrows from '../../assets/arrows_red.svg';
 import illustrationJSON from '../../assets/gestion_projet.json';
-import { breakpoints } from '../../variables';
+import {breakpoints} from '../../variables';
 
 const isBrowser = typeof window !== undefined;
 
@@ -28,13 +28,12 @@ const Story = props => {
         loop: false,
         autoplay: false,
         animationData: illustrationJSON,
-      })
+      });
 
       initComponent();
 
       window.addEventListener('scroll', handleScroll);
       window.addEventListener('resize', initComponent);
-
     }
 
     return () => {
@@ -72,16 +71,16 @@ const Story = props => {
 
       if (scrollYBottom >= wrapperAbsoluteBottom) {
         window.requestAnimationFrame(() => {
-          TweenLite.set(scene.current, { position: 'sticky' });
-        })
+          TweenLite.set(scene.current, {position: 'sticky'});
+        });
       } else if (scrollYTop >= wrapperAbsoluteTop) {
         window.requestAnimationFrame(() => {
-          TweenLite.set(scene.current, { position: 'fixed' });
-        })
+          TweenLite.set(scene.current, {position: 'fixed'});
+        });
       } else if (scene.current.style.position === 'fixed') {
         window.requestAnimationFrame(() => {
-          TweenLite.set(scene.current, { position: 'sticky' });
-        })
+          TweenLite.set(scene.current, {position: 'sticky'});
+        });
       }
 
       for (let i = 0; i <= 3; i++) {
@@ -90,14 +89,13 @@ const Story = props => {
 
         if (scrollYTop > minScroll && scrollYTop < maxScroll) {
           if (parseFloat(chapters[i].style.opacity) === 0) {
-            TweenLite.to(chapters[i], 0.4, { opacity: 1, y: '0%', ease: Power2.easeInOut });
+            TweenLite.to(chapters[i], 0.4, {opacity: 1, y: '0%', ease: Power2.easeInOut});
             svgAnimation.playSegments(svgAnimationSegments[i], true);
           }
         } else {
           if (parseFloat(chapters[i].style.opacity) > 0) {
             const tl = new TimelineLite();
-            tl.to(chapters[i], 0.4, { opacity: 0, y: '-25%', ease: Power2.easeInOut })
-              .set(chapters[i], { y: '25%' });
+            tl.to(chapters[i], 0.4, {opacity: 0, y: '-25%', ease: Power2.easeInOut}).set(chapters[i], {y: '25%'});
           }
         }
       }
@@ -108,10 +106,10 @@ const Story = props => {
     chapters = Array.from(document.querySelectorAll('.story__chapter'));
 
     if (window.innerWidth >= breakpoints.medium) {
-      TweenLite.set(wrapper.current, { height: '400vh' });
-      TweenLite.set(scene.current, { position: 'sticky', top: 0, left: 0, height: '100vh', width: '100%' });
-      TweenLite.set(illustration.current, { display: 'block', position: 'absolute', top: 0, left: 0 });
-      TweenLite.set(chapters, { position: 'absolute', top: 0, left: 0, height: '100%', opacity: 0, y: '25%' });
+      TweenLite.set(wrapper.current, {height: '400vh'});
+      TweenLite.set(scene.current, {position: 'sticky', top: 0, left: 0, height: '100vh', width: '100%'});
+      TweenLite.set(illustration.current, {display: 'block', position: 'absolute', top: 0, left: 0});
+      TweenLite.set(chapters, {position: 'absolute', top: 0, left: 0, height: '100%', opacity: 0, y: '25%'});
 
       const wrapperRelativeTop = wrapper.current.getBoundingClientRect().top;
       const wrapperRelativeBottom = wrapper.current.getBoundingClientRect().bottom;
@@ -123,14 +121,15 @@ const Story = props => {
 
       handleScroll();
     } else {
-      wrapper.current.removeAttribute('style')
-      scene.current.removeAttribute('style')
-      illustration.current.removeAttribute('style')
-      chapters.forEach(chapter => chapter.removeAttribute('style'))
+      wrapper.current.removeAttribute('style');
+      scene.current.removeAttribute('style');
+      illustration.current.removeAttribute('style');
+      chapters.forEach(chapter => chapter.removeAttribute('style'));
 
       svgAnimation.playSegments(
-        [svgAnimationSegments[0][0], svgAnimationSegments[svgAnimationSegments.length - 1][1]]
-        , true)
+        [svgAnimationSegments[0][0], svgAnimationSegments[svgAnimationSegments.length - 1][1]],
+        true
+      );
     }
   }
 
@@ -139,7 +138,7 @@ const Story = props => {
       <ReactMarkdown
         source={markdown}
         renderers={{
-          listItem: ({ children }) => <li style={{ backgroundImage: `url(${arrows})` }}>{children}</li>,
+          listItem: ({children}) => <li style={{backgroundImage: `url(${arrows})`}}>{children}</li>,
         }}
         allowedTypes={['text', 'listItem']}
         unwrapDisallowed={true}

@@ -1,15 +1,15 @@
-import React, { createRef, useState, useEffect } from 'react';
-import { navigate } from 'gatsby';
-import { TweenLite, TimelineLite, Power2 } from 'gsap';
+import React, {createRef, useState} from 'react';
+import {navigate} from 'gatsby';
+import {TweenLite, TimelineLite, Power2} from 'gsap';
 import Lottie from 'lottie-react-web';
-import { TransitionGroup, Transition } from 'react-transition-group';
+import {TransitionGroup, Transition} from 'react-transition-group';
 
 import animation from '../../assets/arrows_loader.json';
 import animationLogo from '../../assets/logo_intro.json';
 
 export const PageTransitionContext = React.createContext();
 
-export default function PageTransition({ children, path }) {
+export default function PageTransition({children, path}) {
   const [appeared, setAppeared] = useState(false);
   const [canScroll, setCanScroll] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -47,7 +47,7 @@ export default function PageTransition({ children, path }) {
               <div className='page-transition__intro-lottie'>
                 <Lottie
                   isPaused={!toggleIntro}
-                  options={{ animationData: animationLogo, autoplay: false, loop: false }}
+                  options={{animationData: animationLogo, autoplay: false, loop: false}}
                 />
               </div>
             </div>
@@ -56,11 +56,11 @@ export default function PageTransition({ children, path }) {
             <Lottie
               width={200}
               isPaused={!toggleLoader}
-              options={{ animationData: animation, autoplay: false, loop: false }}
+              options={{animationData: animation, autoplay: false, loop: false}}
             />
           </div>
           <div className='page-transition__children' ref={wrapper}>
-            <PageTransitionContext.Provider value={{ appeared: appeared, navigate: triggerExit, canScroll: canScroll }}>
+            <PageTransitionContext.Provider value={{appeared: appeared, navigate: triggerExit, canScroll: canScroll}}>
               {children}
             </PageTransitionContext.Provider>
           </div>
@@ -75,15 +75,15 @@ export default function PageTransition({ children, path }) {
       setCanScroll(false);
 
       const link = e.currentTarget.pathname;
-      const tl = new TimelineLite({ onComplete: () => navigate(link) });
+      const tl = new TimelineLite({onComplete: () => navigate(link)});
 
-      tl.to(wrapper.current, speed.exit, { opacity: 0, ease: ease });
+      tl.to(wrapper.current, speed.exit, {opacity: 0, ease: ease});
     }
   }
 
   // React Transition Group
   function onEnter() {
-    if (wrapper && wrapper.current) TweenLite.set(wrapper.current, { opacity: 0 });
+    if (wrapper && wrapper.current) TweenLite.set(wrapper.current, {opacity: 0});
   }
 
   function onEntering() {
@@ -115,9 +115,9 @@ export default function PageTransition({ children, path }) {
 
     return tl
       .call(setToggleLoader, [true])
-      .to(el, speed.loader, { opacity: 1, ease: ease })
-      .to(el, speed.loader, { opacity: 0, ease: ease }, speed.loading - speed.loader)
-      .set(el, { display: 'none' })
+      .to(el, speed.loader, {opacity: 1, ease: ease})
+      .to(el, speed.loader, {opacity: 0, ease: ease}, speed.loading - speed.loader)
+      .set(el, {display: 'none'})
       .call(setToggleLoader, [false]);
   }
 
