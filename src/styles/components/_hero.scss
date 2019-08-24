@@ -36,6 +36,8 @@
   width: 100%;
   object-fit: cover;
   object-position: center center;
+
+  filter: brightness(40%) contrast(75%);
 }
 
 .hero__background-arrows {
