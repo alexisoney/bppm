@@ -4,12 +4,15 @@ import lottie from 'lottie-web';
 import ReactMarkdown from 'react-markdown';
 
 import arrows from '../../assets/arrows_red.svg';
-import illustrationJSON from '../../assets/gestion_projet.json';
+import illustrationFR from '../../assets/gestion_projet_FR.json';
+import illustrationENG from '../../assets/gestion_projet_ENG.json';
 import {breakpoints} from '../../variables';
 
 const isBrowser = typeof window !== undefined;
 
 const Story = props => {
+  const illustrationJSON = props.blok.english ? illustrationENG : illustrationFR;
+
   const wrapper = useRef();
   const scene = useRef();
   const illustration = useRef();
