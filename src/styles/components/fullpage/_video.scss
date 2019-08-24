@@ -6,7 +6,6 @@
   margin: 0;
 
   color: white;
-  font-size: 32px;
 }
 
 .fullpage-video__title-word {
@@ -18,10 +17,7 @@
 @include media('>=medium') {
   .fullpage-video__title {
     margin-left: 10%;
-    max-width: 570px;
-
-    font-size: 64px;
-    line-height: 92px;
+    max-width: 800px;
   }
 }
 
