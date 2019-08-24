@@ -4,7 +4,9 @@ import {Power2, TweenMax} from 'gsap';
 import {PageTransitionContext} from '../../page-transition/page-transition';
 
 const path = 'https://res.cloudinary.com/studio-basilic-tropical/video/upload';
-const file = 'BPPM/golden-gate-bridge-drive-NCBGJZ2_xlhglm';
+const videoFile = 'BPPM/golden-gate-bridge-drive-NCBGJZ2_xlhglm';
+const placeholder =
+  'https://res.cloudinary.com/studio-basilic-tropical/image/upload/w_1920,q_80/BPPM/bppm_video-placeholder.jpg';
 
 export default props => {
   const {appeared} = useContext(PageTransitionContext);
@@ -24,12 +26,6 @@ export default props => {
     }
   }, [appeared]);
 
-  useEffect(() => {
-    if (appeared && videoElement && videoElement.current) {
-      videoElement.current.play().catch(() => null);
-    }
-  }, [appeared]);
-
   const title = props.title
     .split(' ')
     .map(el => `<span class='fullpage-video__title-word'>${el} </span>`)
@@ -38,9 +34,18 @@ export default props => {
   return (
     <>
       <div className='fullpage-video__container'>
-        <video ref={videoElement} className='fullpage-video__element' muted loop preload='auto' data-keepplaying>
-          <source src={`${path}/w_1920,q_80/${file}.mp4`} type='video/mp4' />
-          <source src={`${path}/w_1920,q_80/${file}.webm`} type='video/webm' />
+        <video
+          ref={videoElement}
+          className='fullpage-video__element'
+          muted
+          autoPlay
+          loop
+          preload='auto'
+          data-keepplaying
+          poster={placeholder}
+        >
+          <source src={`${path}/w_1920,q_80/${videoFile}.mp4`} type='video/mp4' />
+          <source src={`${path}/w_1920,q_80/${videoFile}.webm`} type='video/webm' />
         </video>
       </div>
       <h1 ref={titleElement} className='fullpage-video__title' dangerouslySetInnerHTML={{__html: title}} />
