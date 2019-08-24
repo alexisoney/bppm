@@ -23,7 +23,11 @@ export default props => {
             </ReactMarkdown>
           </p>
           <p className='map__title'>{props.blok.phone_title}</p>
-          <p className='map__text'>{props.blok.phone}</p>
+          <p className='map__text'>
+            <ReactMarkdown allowedTypes={['break', 'text']} unwrapDisallowed={true}>
+              {props.blok.phone}
+            </ReactMarkdown>
+          </p>
         </div>
       </div>
     </SbEditable>
