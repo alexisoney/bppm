@@ -6,7 +6,20 @@ export default props => {
   function handleBlur() {}
 
   return (
-    <form className='contact-form' name='contact' data-netlify='true'>
+    <form
+      className='contact-form'
+      name='contact-dev'
+      data-netlify='true'
+      data-netlify-honeypot='bot-field'
+      action='/thanks'
+      method='POST'
+    >
+      <input type='hidden' name='form-name' value='contact-dev' />
+      <div hidden>
+        <label>
+          Ne pas remplir / Don’t fill this out: <input name='bot-field' />
+        </label>
+      </div>
       <input
         className='contact-form__field'
         name='email'
@@ -23,11 +36,9 @@ export default props => {
         aria-label='Message'
         placeholder='Message'
         rows={10}
-        minLength={50}
         onInput={handleInput}
         onBlur={handleBlur}
       />
-      <input type='hidden' name='form-name' value='contact' />
       <input className='button' type='submit' value='Envoyer' />
     </form>
   );

@@ -41,8 +41,10 @@ export default props => {
 
   if (props.link) {
     if (props.link.linktype === 'story') {
+      const url = props.link.cached_url === 'home' ? '' : props.link.cached_url;
+
       return (
-        <Link onClick={e => navigate(e)} className={buttonClassName} to={path.normalize(`/${props.link.cached_url}/`)}>
+        <Link onClick={e => navigate(e)} className={buttonClassName} to={path.normalize(`/${url}/`)}>
           <span className='button__text'>{props.children}</span>
         </Link>
       );

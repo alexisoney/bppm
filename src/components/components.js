@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Button from './button';
+import CallBack from './callback';
 import ContactCTA from './contact-cta';
 import ContactForm from './contact-form';
 import Fullpage from './fullpage';
@@ -24,6 +25,7 @@ const ComponentList = {
   button: Button,
   contactCTA: ContactCTA,
   contactForm: ContactForm,
+  error: CallBack,
   fullpage: Fullpage,
   grid: Grid,
   hero: Hero,
@@ -36,6 +38,7 @@ const ComponentList = {
   story: Story,
   teamMember: TeamMember,
   text: Text,
+  thanks: CallBack,
   title: Title,
   navigation: Navigation,
 };

@@ -74,10 +74,14 @@ export default function PageTransition({children, path}) {
       e.preventDefault();
       setCanScroll(false);
 
-      const link = e.currentTarget.pathname;
+      const link = e.currentTarget.pathname === '/home/' ? '/' : e.currentTarget.pathname;
       const tl = new TimelineLite({onComplete: () => navigate(link)});
 
-      tl.to(wrapper.current, speed.exit, {opacity: 0, ease: ease});
+      if (!appeared) {
+        tl.to(intro.current, 0.4, {height: '100vh', ease: Power2.easeInOut});
+      } else {
+        tl.to(wrapper.current, speed.exit, {opacity: 0, ease: ease});
+      }
     }
   }
 
@@ -89,7 +93,15 @@ export default function PageTransition({children, path}) {
   function onEntering() {
     const tl = new TimelineLite();
 
-    if (!loaded) {
+    if (
+      typeof window !== undefined &&
+      (window.location.pathname.includes('thanks') || window.location.pathname.includes('404'))
+    ) {
+      tl.set(intro.current, {height: '0vh'})
+        .add(displayLoader())
+        .add(displayPage(), `-=${speed.overlap}`)
+        .call(setCanScroll, [true]);
+    } else if (!loaded) {
       // prettier-ignore
       tl
         .delay(0.4)
