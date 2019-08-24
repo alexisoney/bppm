@@ -5,10 +5,20 @@
 
 @include media('>=wide') {
   .map {
+    min-height: 500px;
     margin: 0 0 $margins__page-blocks--wide;
 
     overflow: hidden;
   }
+}
+
+.map__image {
+  width: 100%;
+  height: 45vh;
+}
+
+.map__image .cloudinary__image {
+  position: relative;
 }
 
 @include media('>=wide') {
@@ -21,7 +31,7 @@
 
 .map__image + .map__content {
   position: relative;
-  margin-top: -10%;
+  margin-top: #{$unit * -2}px;
 }
 
 @include media('>=wide') {
