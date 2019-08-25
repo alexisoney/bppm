@@ -72,15 +72,23 @@ export default function PageTransition({children, path}) {
   function triggerExit(e) {
     if (wrapper && wrapper.current) {
       e.preventDefault();
-      setCanScroll(false);
+      if (e.target.href && e.target.href !== window.location.href) {
+        setCanScroll(false);
 
-      const link = e.currentTarget.pathname === '/home/' ? '/' : e.currentTarget.pathname;
-      const tl = new TimelineLite({onComplete: () => navigate(link)});
+        const link = e.currentTarget.pathname === '/home/' ? '/' : e.currentTarget.pathname;
+        const tl = new TimelineLite({onComplete: () => navigate(link)});
 
-      if (!appeared) {
-        tl.to(intro.current, 0.4, {height: '100vh', ease: Power2.easeInOut});
+        if (!loaded) {
+          tl.to(intro.current, 0.4, {height: '100vh', ease: Power2.easeInOut});
+        } else {
+          tl.to(wrapper.current, speed.exit, {opacity: 0, ease: ease});
+        }
       } else {
-        tl.to(wrapper.current, speed.exit, {opacity: 0, ease: ease});
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'smooth',
+        });
       }
     }
   }
@@ -107,8 +115,11 @@ export default function PageTransition({children, path}) {
         .delay(0.4)
         .call(setToggleIntro, [true])
         .add(displayPage())
+        .set('body', {overflow: 'hidden'})
+        .call(scrollTop)
         .to(intro.current, 0.6, { height: '0vh', ease: Power2.easeInOut }, 4.2)
         .call(setAppeared, [true], null, '-=0.2')
+        .set('body', {overflow: ''})
         .call(setLoaded, [true])
         .call(setCanScroll, [true]);
     } else {
@@ -126,9 +137,13 @@ export default function PageTransition({children, path}) {
     const tl = new TimelineLite();
 
     return tl
+      .set('body', {overflow: 'hidden'})
+      .call(scrollTop)
+      .set(el, {display: 'block'})
       .call(setToggleLoader, [true])
       .to(el, speed.loader, {opacity: 1, ease: ease})
       .to(el, speed.loader, {opacity: 0, ease: ease}, speed.loading - speed.loader)
+      .set('body', {overflow: ''})
       .set(el, {display: 'none'})
       .call(setToggleLoader, [false]);
   }
@@ -141,5 +156,9 @@ export default function PageTransition({children, path}) {
     return tl
       .set(el, { position: '', width: '', opacity: 0 })
       .to(el, speed.enter, { opacity: '1', ease: ease });
+  }
+
+  function scrollTop() {
+    window.scrollTo(0, 0);
   }
 }

@@ -25,10 +25,13 @@
   padding: #{$unit}px #{$unit * 2}px;
 
   border: none;
-  border-bottom: 1px solid #222222;
+  border-bottom: 1px solid $colors__beta;
+
+  transition: border 250ms ease-in-out;
 
   &:focus {
     outline: none;
+    border-color: $colors__gamma;
   }
 }
 @include media('>=wide') {

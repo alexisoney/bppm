@@ -2,6 +2,7 @@ import React from 'react';
 import SbEditable from 'storyblok-react';
 
 import arrows from '../../assets/arrows_red.svg';
+import arrowsWhite from '../../assets/arrows_white.svg';
 import {Img} from '../cloudinary';
 
 export default props => {
@@ -12,7 +13,8 @@ export default props => {
       <div className='hero'>
         <div className='hero__background'>
           <Img className='hero__background-image' url={image} parameters='e_grayscale' />
-          <img className='hero__background-arrows' alt='' src={arrows} />
+          <img className='hero__background-watermark' src={arrowsWhite} alt='' />
+          <img className='hero__background-arrows' alt='' src={arrows} onClick={arrowsScroll} />
         </div>
         <h1 className='hero__title'>{title}</h1>
         <ul className='hero__anchors'>
@@ -27,4 +29,14 @@ export default props => {
       </div>
     </SbEditable>
   );
+
+  function arrowsScroll() {
+    if (typeof window !== undefined) {
+      window.scrollTo({
+        top: window.innerHeight,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
+  }
 };

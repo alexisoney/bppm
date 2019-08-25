@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Helmet} from 'react-helmet';
 
 import Components from './components.js';
@@ -43,6 +43,17 @@ const Page = props => {
   if (props.blok.body) {
     hasContactForm = props.blok.body.findIndex(blok => blok.component === 'contactForm') !== -1;
   }
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      document.querySelector('html').style.scrollBehavior = 'smooth';
+    }
+    return () => {
+      if (typeof window !== undefined) {
+        document.querySelector('html').style.scrollBehavior = '';
+      }
+    };
+  }, []);
 
   return (
     <>

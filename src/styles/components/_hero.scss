@@ -49,6 +49,10 @@
   height: auto;
 
   transform: rotate(90deg);
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 @include media('>=wide') {
@@ -56,6 +60,19 @@
     bottom: 8%;
     right: 12%;
   }
+}
+
+.hero__background-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+
+  opacity: 0.05;
 }
 
 .hero__title {

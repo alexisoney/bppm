@@ -69,7 +69,12 @@ export default props => {
   return (
     <nav className='navigation' ref={wrapper}>
       <div className='navigation__background' />
-      <Link className='navigation__logo' ref={logo} to={path.normalize(`/${logoURL ? logoURL : ''}/`)}>
+      <Link
+        onClick={e => navigate(e)}
+        className='navigation__logo'
+        ref={logo}
+        to={path.normalize(`/${logoURL ? logoURL : ''}/`)}
+      >
         <LogoSVG className='navigation__logo-image' />
       </Link>
       <div className='navigation__button' onClick={toggleNavigation}>
