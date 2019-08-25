@@ -43,6 +43,7 @@ class StoryblokEntry extends React.Component {
           blok: content,
           navigation: navigation,
           contactCTA: contactCTA,
+          pagePath: this.props.path,
         })}
       </>
     );

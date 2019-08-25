@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import ReactFullpage from '@fullpage/react-fullpage';
+import {Helmet} from 'react-helmet';
 import SbEditable from 'storyblok-react';
 
 import Center from './center';
@@ -8,7 +9,9 @@ import FullpageNavigation from './navigation';
 import Grid from './grid';
 import Left from './left';
 import Right from './right';
+import {siteName} from '../../variables';
 import SiteNavigation from '../navigation';
+import {siteURL} from '../../variables';
 import Text from './text';
 import Video from './video';
 
@@ -22,6 +25,13 @@ const ComponentList = {
 };
 
 export default props => {
+  let SEO = {
+    title: `${siteName} - ${props.blok.seo_title}`,
+    description: props.blok.seo_description,
+    logo: 'https://res.cloudinary.com/studio-basilic-tropical/image/upload/BPPM/BPPM_logo.jpg',
+    url: siteURL + props.pagePath,
+  };
+
   const [active, setActive] = useState(0);
   const [fullpageApi, setFullpageApi] = useState(null);
 
@@ -32,6 +42,19 @@ export default props => {
 
   return (
     <>
+      <Helmet>
+        <title>{SEO.title}</title>
+        <meta name='description' content={SEO.description} />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content={SEO.title} />
+        <meta property='og:description' content={SEO.description} />
+        <meta property='og:url' content={SEO.url} />
+        <meta property='og:image' content={SEO.logo} />
+        <meta property='og:image:secure_url' content={SEO.logo} />
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta property='og:site_name' content={siteName} />
+        <meta name='twitter:image:alt' content={SEO.title} />
+      </Helmet>
       <FullpageNavigation fullpageApi={fullpageApi} sections={sections} active={active} />
       <ReactFullpage
         className='fullpage'

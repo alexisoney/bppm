@@ -1,13 +1,20 @@
 import React from 'react';
-import Components from './components.js';
+import {Helmet} from 'react-helmet';
 
+import Components from './components.js';
 import ContactCTA from './contact-cta';
 import Footer from './footer';
 import Navigation from './navigation';
-
-// import PageNavigation from './page-navigation';
+import {siteName, siteURL} from '../variables';
 
 const Page = props => {
+  let SEO = {
+    title: `${siteName} - ${props.blok.seo_title}`,
+    description: props.blok.seo_description,
+    logo: 'https://res.cloudinary.com/studio-basilic-tropical/image/upload/BPPM/BPPM_logo.jpg',
+    url: siteURL + props.pagePath,
+  };
+
   let titles = [];
   if (props.blok.body) {
     let titleIndex = 0;
@@ -39,8 +46,20 @@ const Page = props => {
 
   return (
     <>
+      <Helmet>
+        <title>{SEO.title}</title>
+        <meta name='description' content={SEO.description} />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content={SEO.title} />
+        <meta property='og:description' content={SEO.description} />
+        <meta property='og:url' content={SEO.url} />
+        <meta property='og:image' content={SEO.logo} />
+        <meta property='og:image:secure_url' content={SEO.logo} />
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta property='og:site_name' content={siteName} />
+        <meta name='twitter:image:alt' content={SEO.title} />
+      </Helmet>
       <Navigation blok={props.navigation} />
-      {/* {titles.length > 0 && <PageNavigation titles={titles} />} */}
       {props.blok.body &&
         props.blok.body.map(blok =>
           React.createElement(Components(blok.component), {

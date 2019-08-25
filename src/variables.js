@@ -4,3 +4,7 @@ export const breakpoints = {
   medium: 800,
   wide: 1080,
 };
+
+export const siteURL = 'https://www.bppm.fr';
+
+export const siteName = 'BPPM';
