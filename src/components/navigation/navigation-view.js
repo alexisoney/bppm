@@ -41,6 +41,9 @@ export default props => {
   useEffect(() => {
     if (wrapper.current && appeared) {
       wrapper.current.classList.add('navigation--appeared');
+      setTimeout(() => {
+        wrapper.current.style.overflow = 'visible';
+      }, 850);
     }
   }, [appeared]);
 

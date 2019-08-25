@@ -72,7 +72,7 @@ export default function PageTransition({children, path}) {
   function triggerExit(e) {
     if (wrapper && wrapper.current) {
       e.preventDefault();
-      if (e.target.href && e.target.href !== window.location.href) {
+      if (e.currentTarget.href !== window.location.href) {
         setCanScroll(false);
 
         const link = e.currentTarget.pathname === '/home/' ? '/' : e.currentTarget.pathname;
@@ -83,6 +83,7 @@ export default function PageTransition({children, path}) {
         } else {
           tl.to(wrapper.current, speed.exit, {opacity: 0, ease: ease});
         }
+        tl.call(setAppeared, [false]);
       } else {
         window.scrollTo({
           top: 0,
@@ -126,6 +127,7 @@ export default function PageTransition({children, path}) {
       tl.delay(speed.exit)
         .add(displayLoader(), `-=${speed.overlap}`)
         .add(displayPage(), `-=${speed.overlap}`)
+        .call(setAppeared, [true], null, '-=0.2')
         .call(setCanScroll, [true]);
     }
   }
