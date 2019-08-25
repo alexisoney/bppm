@@ -59,6 +59,7 @@ export default props => {
       if (wrapperWidth <= navigationWidth) {
         wrapper.current.classList.add('navigation--small');
       } else {
+        wrapper.current.classList.remove('navigation--open');
         wrapper.current.classList.remove('navigation--small');
         setIsOpen(false);
       }
@@ -81,7 +82,6 @@ export default props => {
       </div>
       <ul className='navigation__items' ref={items}>
         {props.blok.navigations_items.map(item => {
-          if (item.isLogo) return null;
           if (item.component !== 'link' && item.link.linktype !== 'story') return null;
           return (
             <SbEditable key={item._uid} content={item}>
@@ -102,6 +102,24 @@ export default props => {
         })}
       </ul>
       <div className='navigation__overlay navigation__overlay-one' />
+      <ul className='navigation__languages-items'>
+        <li
+          className={`navigation__languages-item 
+          ${window.location.href.includes('/en/') ? '' : 'navigation__languages-item--active'}`}
+        >
+          <a className='navigation__languages-link' href={`${window.location.origin}/`}>
+            FR
+          </a>
+        </li>
+        <li
+          className={`navigation__languages-item 
+          ${window.location.href.includes('/en/') ? 'navigation__languages-item--active' : ''}`}
+        >
+          <a className='navigation__languages-link' href={`${window.location.origin}/en/home/`}>
+            EN
+          </a>
+        </li>
+      </ul>
     </nav>
   );
 

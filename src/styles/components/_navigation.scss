@@ -9,7 +9,6 @@
   padding: 0 5%;
 
   z-index: 999;
-  overflow: hidden;
 }
 
 .navigation__overlay {
@@ -84,7 +83,7 @@
 .navigation__logo {
   display: block;
 
-  height: #{$unit * 4}px;
+  height: #{$unit * 3}px;
 
   margin: auto;
   margin-left: 0;
@@ -175,6 +174,16 @@
   &:hover {
     cursor: pointer;
   }
+
+  &:first-child {
+    display: none;
+  }
+}
+
+.navigation--small .navigation__item {
+  &:first-child {
+    display: initial;
+  }
 }
 
 .navigation__link {
@@ -182,7 +191,7 @@
   display: block;
 
   margin: 0;
-  padding: #{$unit * 4.5}px #{$unit * 2}px;
+  padding: #{$unit * 3}px #{$unit * 2}px;
 
   color: $colors__omega;
   font-weight: 500;
@@ -194,11 +203,16 @@
 
 .navigation--small .navigation__link {
   margin: #{$unit * 2}px 0;
-  padding-top: #{$unit * 2}px;
-  padding-bottom: #{$unit * 2}px;
+  padding: #{$unit}px #{$unit * 4}px;
 
-  font-size: 20px;
-  text-align: center;
+  font-size: 16px;
+}
+
+@media screen and (max-height: 600px) {
+  .navigation--small .navigation__link {
+    margin-top: #{$unit / 2}px;
+    margin-bottom: #{$unit / 2}px;
+  }
 }
 
 .navigation__link-background {
@@ -229,4 +243,73 @@
 
 .navigation__link--active:not(.navigation--small) .navigation__link-background--active {
   transform: translateX(0%);
+}
+
+.navigation__languages-items {
+  position: absolute;
+  bottom: 50%;
+  left: 100%;
+  transform: translateY(50%);
+  display: flex;
+  justify-content: center;
+
+  width: 10vw;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+  text-transform: uppercase;
+}
+
+.navigation--small .navigation__languages-items {
+  bottom: #{$unit * 3}px;
+  left: #{$unit * 4}px;
+  transform: none;
+  justify-content: flex-start;
+
+  width: auto;
+}
+
+.navigation--small:not(.navigation--open) .navigation__languages-items {
+  display: none;
+}
+
+.navigation__languages-item {
+  position: relative;
+  margin-right: #{$unit * 2}px;
+}
+
+.navigation__languages-link {
+  color: $colors__omega;
+  text-decoration: none;
+
+  &::after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 0%;
+    height: 2px;
+
+    transition: width 150ms ease-in-out;
+
+    background-color: $colors__alpha;
+    content: '';
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+.navigation__languages-item--active .navigation__languages-link {
+  font-weight: 700;
+
+  &::after {
+    width: 100%;
+  }
+}
+
+#fullpage .navigation:not(.navigation--small) .navigation__languages-link {
+  color: $colors__psi;
 }
