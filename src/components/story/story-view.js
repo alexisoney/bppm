@@ -58,7 +58,9 @@ const Story = props => {
         {props.blok.chapters.map(chapter => (
           <div className='story__chapter' key={chapter._uid}>
             <div className='story__content'>
-              <h3 className='story__title'>{chapter.title}</h3>
+              <h3 className='story__title'>
+                <ReactMarkdown source={chapter.title} allowedTypes={['text', 'strong']} unwrapDisallowed={true} />
+              </h3>
               <ul className='story__text'>{markdownToList(chapter.content)}</ul>
             </div>
           </div>
@@ -143,7 +145,7 @@ const Story = props => {
         renderers={{
           listItem: ({children}) => <li style={{backgroundImage: `url(${arrows})`}}>{children}</li>,
         }}
-        allowedTypes={['text', 'listItem']}
+        allowedTypes={['text', 'listItem', 'strong']}
         unwrapDisallowed={true}
       />
     );

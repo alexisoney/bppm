@@ -11,7 +11,6 @@ export default props => {
   const {image, anchors} = props.blok;
 
   const {appeared} = useContext(PageTransitionContext);
-  console.log(appeared);
 
   const anchorsElement = useRef();
   const titleElement = useRef();
