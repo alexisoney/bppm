@@ -17,6 +17,7 @@
 @include media('>=medium') {
   .fullpage-video__title {
     margin-left: 10%;
+    max-width: 80%;
   }
 }
 
