@@ -1,0 +1,5 @@
+[context.production.environment]
+GA_TRACKING_ID="UA-146504901-1"
+
+[context.develop.environment]
+GA_TRACKING_ID="UA-146504901-2"

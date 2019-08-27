@@ -1,4 +1,7 @@
 module.exports = {
+  siteMetadata: {
+    siteUrl: 'https://www.bppm.fr',
+  },
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-robots-txt',
@@ -12,12 +15,13 @@ module.exports = {
         version: 'draft',
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     trackingId: process.env.GA_TRACKING_ID,
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: process.env.GA_TRACKING_ID,
+        anonymize: true,
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

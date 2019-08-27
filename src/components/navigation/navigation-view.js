@@ -34,8 +34,10 @@ export default props => {
       });
     }
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
   }, []);
 
   useEffect(() => {
@@ -113,23 +115,30 @@ export default props => {
       <ul className='navigation__languages-items'>
         <li
           className={`navigation__languages-item 
-          ${window.location.href.includes('/en/') ? '' : 'navigation__languages-item--active'}`}
+          ${isEnglish() ? '' : 'navigation__languages-item--active'}`}
         >
-          <a className='navigation__languages-link' href={`${window.location.origin}/`}>
+          <a className='navigation__languages-link' href={`${getWindowLocationOrigin()}/`}>
             FR
           </a>
         </li>
         <li
           className={`navigation__languages-item 
-          ${window.location.href.includes('/en/') ? 'navigation__languages-item--active' : ''}`}
+          ${isEnglish() ? 'navigation__languages-item--active' : ''}`}
         >
-          <a className='navigation__languages-link' href={`${window.location.origin}/en/home/`}>
+          <a className='navigation__languages-link' href={`${getWindowLocationOrigin()}/en/home/`}>
             EN
           </a>
         </li>
       </ul>
     </nav>
   );
+
+  function getWindowLocationOrigin() {
+    if (typeof window !== 'undefined') {
+      return window.location.origin;
+    }
+    return '';
+  }
 
   function getNavigationWidth() {
     if (!items.current && !logo.current) return null;
@@ -150,6 +159,14 @@ export default props => {
       return window.innerWidth * 0.8; // Because set as 80% in CSS
     }
     return null;
+  }
+
+  function isEnglish() {
+    if (typeof window !== 'undefined') {
+      return window.location.href.includes('/en/');
+    }
+
+    return false;
   }
 
   function toggleNavigation() {
