@@ -90,18 +90,20 @@ class Story extends Component {
       const scrollYTop = window.pageYOffset;
       const scrollYBottom = window.pageYOffset + window.innerHeight;
 
-      if (scrollYBottom >= this.wrapperPosition.bottom) {
-        window.requestAnimationFrame(() => {
-          TweenLite.set(this.scene.current, {position: 'sticky'});
-        });
-      } else if (scrollYTop >= this.wrapperPosition.top) {
-        window.requestAnimationFrame(() => {
-          TweenLite.set(this.scene.current, {position: 'fixed'});
-        });
-      } else if (this.scene.current.style.position === 'fixed') {
-        window.requestAnimationFrame(() => {
-          TweenLite.set(this.scene.current, {position: 'sticky'});
-        });
+      if (navigator.userAgent.indexOf('Safari') > -1 || navigator.userAgent.indexOf('Firefox') > -1) {
+        if (scrollYBottom >= this.wrapperPosition.bottom) {
+          window.requestAnimationFrame(() => {
+            TweenLite.set(this.scene.current, {position: 'absolute', bottom: 0, top: ''});
+          });
+        } else if (scrollYTop >= this.wrapperPosition.top) {
+          window.requestAnimationFrame(() => {
+            TweenLite.set(this.scene.current, {position: 'fixed', top: 0, bottom: ''});
+          });
+        } else if (this.scene.current.style.position === 'fixed') {
+          window.requestAnimationFrame(() => {
+            TweenLite.set(this.scene.current, {position: 'absolute', top: 0, bottom: ''});
+          });
+        }
       }
 
       if (!this.isAnimating) {

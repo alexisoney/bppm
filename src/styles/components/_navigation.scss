@@ -59,8 +59,8 @@
 }
 
 .navigation--small.navigation--open {
-  height: calc(100vh - #{$unit * 4 * 2}px);
-  max-height: calc(100vh - #{$unit * 4 * 2}px);
+  height: calc(90vh - #{$unit * 4 * 2}px);
+  max-height: calc(90vh - #{$unit * 4 * 2}px);
 }
 
 .navigation__background {
@@ -275,7 +275,7 @@
   display: none;
 }
 
-.navigation__languages-item {
+.navigation__languages-item:not(:last-child) {
   position: relative;
   margin-right: #{$unit * 2}px;
 }

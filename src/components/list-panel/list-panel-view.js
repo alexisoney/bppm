@@ -3,7 +3,6 @@ import {TimelineLite, Power2} from 'gsap';
 import {Transition, TransitionGroup} from 'react-transition-group';
 import SbEditable from 'storyblok-react';
 
-import {breakpoints} from '../../variables';
 import {Img} from '../cloudinary';
 
 export default props => {
@@ -42,7 +41,7 @@ export default props => {
             }
 
             return (
-              <li className={itemClassName} key={item._uid} onClick={() => handleClick(item)}>
+              <li className={itemClassName} key={item._uid} onClick={() => setActive(item)}>
                 <div className='list-panel__title-background list-panel__title-background--hover' />
                 <div className='list-panel__title-background list-panel__title-background--active' />
                 <div className='list-panel__title-text'>{item.title}</div>
@@ -57,8 +56,8 @@ export default props => {
             return (
               <Transition
                 key={item._uid}
-                timeout={{exit: 400, enter: 700}}
-                onExit={el => contentExit(el)}
+                timeout={{exit: 300, enter: 700}}
+                onExiting={el => contentExiting(el)}
                 onEnter={el => contentEnter(el)}
               >
                 <div className='list-panel__content'>
@@ -78,16 +77,26 @@ export default props => {
 
   function contentEnter(el) {
     const tl = new TimelineLite();
+    const title = el.querySelector('.list-panel__content-title');
+    const divider = el.querySelector('.list-panel__content-divider');
+    const text = el.querySelector('.list-panel__content-text');
+
     // prettier-ignore
-    tl.set(el, {y: '50%', display: 'none', opacity: 0})
+    tl.set(el, {display: 'none'})
+      .set([title,divider,text], {y: 100, opacity: 0})
       .set(el, {display: ''}, 0.4)
-      .to(el, 0.4, {y: '0%', opacity: 1, ease: Power2.easeInOut});
+      .to([title,divider], 0.4, {y: 0, opacity: 1, ease: Power2.easeOut})
+      .to(text, 0.4, {y: 0, opacity: 1, ease: Power2.easeOut}, '-=0.2');
   }
 
-  function contentExit(el) {
+  function contentExiting(el) {
     const tl = new TimelineLite();
+    const title = el.querySelector('.list-panel__content-title');
+    const divider = el.querySelector('.list-panel__content-divider');
+    const text = el.querySelector('.list-panel__content-text');
     // prettier-ignore
-    tl.to(el, 0.4, {y: '-50%', opacity: 0, ease: Power2.easeInOut});
+    tl.to([title,divider], 0.3, {y: -100, opacity: 0, ease: Power2.easeOut})
+      .to(text, 0.3, {y: -100, opacity: 0, ease: Power2.easeOut}, '-=0.2');
   }
 
   function imageEnter(el) {
@@ -102,12 +111,5 @@ export default props => {
     const tl = new TimelineLite();
     // prettier-ignore
     tl.to(el, 0.4, {scale: 0.98, opacity: 0});
-  }
-
-  function handleClick(item) {
-    setActive(item);
-    if (contentTitle.current && window.innerWidth < breakpoints.wide) {
-      setTimeout(() => contentTitle.current.scrollIntoView(), 400);
-    }
   }
 };

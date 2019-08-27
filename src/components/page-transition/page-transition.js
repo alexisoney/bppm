@@ -60,7 +60,9 @@ export default function PageTransition({children, path}) {
             />
           </div>
           <div className='page-transition__children' ref={wrapper}>
-            <PageTransitionContext.Provider value={{appeared: appeared, navigate: triggerExit, canScroll: canScroll}}>
+            <PageTransitionContext.Provider
+              value={{appeared: appeared, loaded: loaded, navigate: triggerExit, canScroll: canScroll}}
+            >
               {children}
             </PageTransitionContext.Provider>
           </div>
@@ -120,7 +122,7 @@ export default function PageTransition({children, path}) {
         .call(scrollTop)
         .to(intro.current, 0.6, { height: '0vh', ease: Power2.easeInOut }, 4.2)
         .call(setAppeared, [true], null, '-=0.2')
-        .set('body', {overflow: ''})
+        .set('body', {overflowY: 'visible', overflowX: 'hidden'})
         .call(setLoaded, [true])
         .call(setCanScroll, [true]);
     } else {
@@ -145,7 +147,7 @@ export default function PageTransition({children, path}) {
       .call(setToggleLoader, [true])
       .to(el, speed.loader, {opacity: 1, ease: ease})
       .to(el, speed.loader, {opacity: 0, ease: ease}, speed.loading - speed.loader)
-      .set('body', {overflow: ''})
+      .set('body', {overflowY: 'visible', overflowX: 'hidden'})
       .set(el, {display: 'none'})
       .call(setToggleLoader, [false]);
   }

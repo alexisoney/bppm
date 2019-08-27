@@ -15,7 +15,7 @@ export default props => {
   const logo = useRef();
   const wrapper = useRef();
 
-  const {appeared, navigate} = useContext(PageTransitionContext);
+  const {loaded, navigate} = useContext(PageTransitionContext);
   const [isOpen, setIsOpen] = useState(false);
   const [navigationWidth, setNavigationWidth] = useState();
   const [wrapperWidth, setWrapperWidth] = useState();
@@ -41,13 +41,13 @@ export default props => {
   }, []);
 
   useEffect(() => {
-    if (wrapper.current && appeared) {
+    if (wrapper.current && loaded) {
       wrapper.current.classList.add('navigation--appeared');
       setTimeout(() => {
         wrapper.current.style.overflow = 'visible';
       }, 850);
     }
-  }, [appeared]);
+  }, [loaded]);
 
   useEffect(() => {
     if (wrapper.current) {
@@ -75,7 +75,7 @@ export default props => {
     <nav className='navigation' ref={wrapper}>
       <div className='navigation__background' />
       <Link
-        onClick={e => navigate(e)}
+        onClick={e => handleClick(e)}
         className='navigation__logo'
         ref={logo}
         to={path.normalize(`/${logoURL ? logoURL : ''}/`)}
@@ -97,7 +97,7 @@ export default props => {
             <SbEditable key={item._uid} content={item}>
               <li className='navigation__item'>
                 <Link
-                  onClick={e => navigate(e)}
+                  onClick={e => handleClick(e)}
                   className='navigation__link'
                   to={path.normalize(`/${item.link.cached_url}/`)}
                   activeClassName='navigation__link--active'
@@ -159,6 +159,11 @@ export default props => {
       return window.innerWidth * 0.8; // Because set as 80% in CSS
     }
     return null;
+  }
+
+  function handleClick(e) {
+    e.currentTarget.classList.add('navigation__link--active');
+    navigate(e);
   }
 
   function isEnglish() {

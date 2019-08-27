@@ -39,7 +39,9 @@ export default props => {
         onInput={handleInput}
         onBlur={handleBlur}
       />
-      <input className='button' type='submit' value={props.blok.button} />
+      <button className='button' type='submit'>
+        <span className='button__text'>{props.blok.button}</span>
+      </button>
     </form>
   );
 };

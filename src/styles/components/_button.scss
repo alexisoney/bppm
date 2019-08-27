@@ -68,8 +68,8 @@
   height: 100%;
   width: 101%;
 
-  background-color: black;
-  opacity: 0.2;
+  background-color: $colors__gamma;
+  opacity: 0.15;
   content: '';
   transition: transform 0.25s ease-in-out;
 }

@@ -7,12 +7,13 @@
 
   height: 100vh;
   padding: #{$unit * 4}px;
-  margin: 0 0 $margins__page-blocks--narrow;
+  margin: 0;
+
+  overflow: hidden;
 }
 
 @include media('>=wide') {
   .callback {
-    margin-bottom: $margins__page-blocks--wide;
     padding: 0 12%;
   }
 }
@@ -56,7 +57,7 @@
   font-weight: 700;
   color: $colors__omega;
 
-  &:after {
+  &::after {
     position: absolute;
     top: 50%;
     right: #{$unit * -8}px;
@@ -66,5 +67,18 @@
 
     background-color: $colors__alpha;
     content: '';
+  }
+}
+
+@include media('<wide') {
+  .callback__text {
+    margin-bottom: #{$unit * 12}px;
+
+    &::after {
+      top: unset;
+      bottom: #{$unit * -3}px;
+      left: 0;
+      right: unset;
+    }
   }
 }

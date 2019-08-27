@@ -1,6 +1,12 @@
 .list-panel {
   max-width: $max-widths__page-blocks;
-  margin: 0 0 $margins__page-blocks--narrow;
+  margin: 0 0 #{$unit * 4}px;
+}
+
+@include media('<wide') {
+  .list-panel + .contact-cta {
+    margin-top: 0;
+  }
 }
 
 @include media('>=wide') {
@@ -170,6 +176,8 @@
 
 @include media('<wide') {
   .list-panel__content-container {
+    height: #{$unit * 30}px;
+
     overflow: hidden;
   }
 }
@@ -182,7 +190,7 @@
 
 @include media('>=wide') {
   .list-panel__content {
-    padding: 0;
+    padding: #{$unit * 12}px 0;
     padding-left: #{$unit * 4}px;
   }
 }
