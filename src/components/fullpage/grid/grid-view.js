@@ -21,6 +21,7 @@ const Grid = ({index, title, images, button, link}) => (
                 parameters='e_grayscale'
                 style={item.position ? {objectPosition: item.position[0]} : null}
               />
+              <div className='fullpage-grid__gradient' />
               <p className='fullpage-grid__title'>{item.title}</p>
             </div>
           );
