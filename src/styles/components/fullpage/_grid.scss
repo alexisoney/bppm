@@ -48,10 +48,6 @@
   justify-content: flex-end;
 
   min-height: 224px;
-
-  &:hover {
-    cursor: pointer;
-  }
 }
 
 @include media('>=medium') {
