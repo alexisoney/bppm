@@ -44,7 +44,7 @@
   background-color: $colors__omega;
   border: 1px solid $colors__alpha;
 
-  transition: color 150ms ease-in-out;
+  transition: color 250ms $transition_easing;
 
   &:link:not(:hover),
   &:visited:not(:hover),
@@ -71,7 +71,7 @@
   background-color: $colors__gamma;
   opacity: 0.15;
   content: '';
-  transition: transform 0.25s ease-in-out;
+  transition: transform 250ms $transition_easing;
 }
 
 .button--outlined::after {

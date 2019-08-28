@@ -20,7 +20,7 @@
   width: 100%;
   height: 100%;
 
-  transition: width 800ms ease-in-out;
+  transition: width 800ms $transition_easing;
 
   background-color: $colors__gamma;
 }
@@ -38,7 +38,7 @@
   height: 100%;
   width: 40%;
 
-  transition: transform 600ms ease-in-out;
+  transition: transform 600ms $transition_easing;
 
   background-color: $colors__alpha;
   content: '';
@@ -225,7 +225,7 @@
   height: 100%;
 
   transform: translateX(-101%);
-  transition: transform 300ms ease-in-out;
+  transition: transform 600ms $transition_easing;
 
   z-index: -1;
 }
@@ -281,18 +281,19 @@
 }
 
 .navigation__languages-link {
+  position: relative;
   color: $colors__omega;
   text-decoration: none;
 
   &::after {
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: #{$unit * -1}px;
 
     width: 0%;
     height: 2px;
 
-    transition: width 150ms ease-in-out;
+    transition: width 400ms $transition_easing;
 
     background-color: $colors__alpha;
     content: '';

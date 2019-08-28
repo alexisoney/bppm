@@ -7,6 +7,9 @@ $breakpoints: (
   wide: 1080px,
 );
 
+// $transition_easing: cubic-bezier(0.19, 1, 0.22, 1);
+$transition_easing: cubic-bezier(0.165, 0.84, 0.44, 1);
+
 $max-widths__page-blocks: 1220px;
 
 $margins__page-blocks--narrow: #{$unit * 8}px;
