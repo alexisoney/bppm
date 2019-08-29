@@ -27,7 +27,7 @@
   border: none;
   border-bottom: 1px solid $colors__beta;
 
-  transition: border 250ms ease-in-out;
+  transition: border 250ms $transition_easing;
 
   &:focus {
     outline: none;

@@ -1,5 +1,5 @@
 import React, {createRef, Component} from 'react';
-import {Power2, TweenLite, TimelineLite} from 'gsap';
+import {Power3, TweenLite, TimelineLite} from 'gsap';
 import lottie from 'lottie-web';
 import ReactMarkdown from 'react-markdown';
 import {TransitionGroup, Transition} from 'react-transition-group';
@@ -69,8 +69,8 @@ class Story extends Component {
 
       // prettier-ignore
       tl.set(el, {position: 'absolute'})
-      .fromTo(title, 0.4, {y: 400, opacity: 0},{y: 0, opacity: 1, ease: Power2.easeOut},0.4)
-      .fromTo(text, 0.4, {y: 400, opacity: 0},{y: 0, opacity: 1, ease: Power2.easeOut}, '-=0.2')
+        .fromTo(title, 0.4, {y: 400, opacity: 0},{y: 0, opacity: 1, ease: Power3.easeOut},0.4)
+        .fromTo(text, 0.4, {y: 400, opacity: 0},{y: 0, opacity: 1, ease: Power3.easeOut}, '-=0.2');
     }
   }
 
@@ -81,8 +81,8 @@ class Story extends Component {
 
     // prettier-ignore
     tl.set(el, {position: 'absolute'})
-      .to(title, 0.4, {y: -200, opacity: 0, ease: Power2.easeInOut})
-      .to(text, 0.4, {y: -200, opacity: 0, ease: Power2.easeInOut}, '-=0.35')
+      .to(title, 0.4, {y: -200, opacity: 0, ease: Power3.easeOut})
+      .to(text, 0.4, {y: -200, opacity: 0, ease: Power3.easeOut}, '-=0.35');
   }
 
   handleScroll() {
@@ -150,7 +150,7 @@ class Story extends Component {
     this.setState({windowWidth: window.innerWidth});
 
     if (window.innerWidth >= breakpoints.medium) {
-      TweenLite.set(this.wrapper.current, {height: '400vh'});
+      TweenLite.set(this.wrapper.current, {height: '500vh'});
       TweenLite.set(this.scene.current, {position: 'sticky', top: 0, left: 0, height: '100vh', width: '100%'});
       TweenLite.set(this.illustration.current, {display: 'block', position: 'absolute', top: 0, left: 0});
 

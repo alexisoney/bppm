@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useRef} from 'react';
-import {Power2, TweenMax} from 'gsap';
+import {Power3, TweenMax} from 'gsap';
 
 import {PageTransitionContext} from '../../page-transition/page-transition';
 
@@ -21,7 +21,7 @@ export default props => {
       if (!appeared) {
         TweenMax.set(el, {opacity: 0, y: 200});
       } else {
-        TweenMax.staggerTo(el, 0.8, {y: 0, opacity: 1, ease: Power2.easeInOut}, 0.4);
+        TweenMax.staggerTo(el, 0.8, {y: 0, opacity: 1, ease: Power3.easeOut}, 0.4);
       }
     }
   }, [appeared]);

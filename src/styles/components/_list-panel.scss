@@ -130,6 +130,12 @@
   }
 }
 
+@media screen and (max-width: 480px) {
+  .list-panel__title {
+    font-size: 12px;
+  }
+}
+
 @include media('>=wide') {
   .list-panel__title {
     width: 100%;
@@ -150,7 +156,7 @@
   height: 100%;
 
   transform: translateX(-101%);
-  transition: transform 300ms ease-in-out;
+  transition: transform 300ms $transition_easing;
 }
 
 .list-panel__title-background--hover {
@@ -176,7 +182,7 @@
 
 @include media('<wide') {
   .list-panel__content-container {
-    height: #{$unit * 30}px;
+    min-height: #{$unit * 40}px;
 
     overflow: hidden;
   }

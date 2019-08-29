@@ -61,6 +61,7 @@ export default props => {
         sectionSelector={`.${sectionsClassName}`}
         sectionsColor={[]}
         licenseKey={'YOUR_KEY_HERE'} // Get one from https://alvarotrigo.com/fullPage/pricing/
+        easing='easeOutQuart'
         responsiveWidth={1080}
         onLeave={onLeave}
         scrollBar

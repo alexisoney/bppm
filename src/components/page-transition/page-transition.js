@@ -1,6 +1,6 @@
 import React, {createRef, useState} from 'react';
 import {navigate} from 'gatsby';
-import {TweenLite, TimelineLite, Power2} from 'gsap';
+import {TweenLite, TimelineLite, Power3} from 'gsap';
 import Lottie from 'lottie-react-web';
 import {TransitionGroup, Transition} from 'react-transition-group';
 
@@ -27,7 +27,7 @@ export default function PageTransition({children, path}) {
     loading: 2,
     overlap: 0.5,
   };
-  const ease = Power2.easeInOut;
+  const ease = Power3.easeOut;
 
   return (
     <TransitionGroup component={null}>
@@ -81,7 +81,7 @@ export default function PageTransition({children, path}) {
         const tl = new TimelineLite({onComplete: () => navigate(link)});
 
         if (!loaded) {
-          tl.to(intro.current, 0.4, {height: '100vh', ease: Power2.easeInOut});
+          tl.to(intro.current, 0.4, {height: '100vh', ease: Power3.easeOut});
         } else {
           tl.to(wrapper.current, speed.exit, {opacity: 0, ease: ease});
         }
@@ -120,7 +120,7 @@ export default function PageTransition({children, path}) {
         .add(displayPage())
         .set('body', {overflow: 'hidden'})
         .call(scrollTop)
-        .to(intro.current, 0.6, { height: '0vh', ease: Power2.easeInOut }, 4.2)
+        .to(intro.current, 0.6, { height: '0vh', ease: Power3.easeOut }, 4.2)
         .call(setAppeared, [true], null, '-=0.2')
         .set('body', {overflowY: 'visible', overflowX: 'hidden'})
         .call(setLoaded, [true])

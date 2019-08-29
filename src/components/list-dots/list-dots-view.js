@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {TimelineLite, Power2} from 'gsap';
+import {TimelineLite, Power3} from 'gsap';
 import {Transition, TransitionGroup} from 'react-transition-group';
 import SbEditable from 'storyblok-react';
 
@@ -85,8 +85,8 @@ export default props => {
     tl.set(el, {visibility: 'hidden'})
       .set([title, text], {y: '50%', opacity: 0})
       .set(el, {visibility: ''}, 0.3)
-      .to(title, 0.4, {y: '0%', opacity: 1, ease: Power2.easeInOut})
-      .to(text, 0.4, {y: '0%', opacity: 1, ease: Power2.easeInOut}, '-=0.2');
+      .to(title, 0.4, {y: '0%', opacity: 1, ease: Power3.easeOut})
+      .to(text, 0.4, {y: '0%', opacity: 1, ease: Power3.easeOut}, '-=0.2');
   }
 
   function contentExit(el) {
@@ -95,8 +95,8 @@ export default props => {
     const text = el.querySelectorAll('div, p')[1];
 
     tl.set(el, {position: 'absolute', bottom: 0, left: 0, width: '100%'})
-      .to(title, 0.4, {y: '-50%', opacity: 0, ease: Power2.easeInOut})
-      .to(text, 0.4, {y: '-50%', opacity: 0, ease: Power2.easeInOut}, '-=0.2');
+      .to(title, 0.4, {y: '-50%', opacity: 0, ease: Power3.easeOut})
+      .to(text, 0.4, {y: '-50%', opacity: 0, ease: Power3.easeOut}, '-=0.2');
   }
 
   function getWindowWidth() {

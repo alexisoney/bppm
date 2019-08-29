@@ -20,11 +20,45 @@
   & > strong {
     color: $colors__alpha;
   }
+
+  & > em {
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    margin-top: #{$unit * 3}px;
+
+    &::after {
+      position: absolute;
+      top: #{$unit * -1 / 2}px;
+      left: 0;
+
+      width: #{$unit * 2}px;
+      height: 2px;
+
+      background-color: $colors__alpha;
+
+      content: '';
+    }
+  }
 }
 
 @include media('>=wide') {
   .kicker > p {
     font-size: 48px;
     line-height: 72px;
+
+    & > em {
+      font-size: 32px;
+      margin-top: #{$unit * 5}px;
+
+      &::after {
+        top: 0;
+        left: 0;
+
+        width: #{$unit * 4}px;
+      }
+    }
   }
 }

@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {TimelineLite, Power2} from 'gsap';
+import {TimelineLite, Power3} from 'gsap';
 import {Transition, TransitionGroup} from 'react-transition-group';
 import SbEditable from 'storyblok-react';
 
@@ -85,8 +85,8 @@ export default props => {
     tl.set(el, {display: 'none'})
       .set([title,divider,text], {y: 100, opacity: 0})
       .set(el, {display: ''}, 0.4)
-      .to([title,divider], 0.4, {y: 0, opacity: 1, ease: Power2.easeOut})
-      .to(text, 0.4, {y: 0, opacity: 1, ease: Power2.easeOut}, '-=0.2');
+      .to([title,divider], 0.4, {y: 0, opacity: 1, ease: Power3.easeOut})
+      .to(text, 0.4, {y: 0, opacity: 1, ease: Power3.easeOut}, '-=0.2');
   }
 
   function contentExiting(el) {
@@ -95,8 +95,8 @@ export default props => {
     const divider = el.querySelector('.list-panel__content-divider');
     const text = el.querySelector('.list-panel__content-text');
     // prettier-ignore
-    tl.to([title,divider], 0.3, {y: -100, opacity: 0, ease: Power2.easeOut})
-      .to(text, 0.3, {y: -100, opacity: 0, ease: Power2.easeOut}, '-=0.2');
+    tl.to([title,divider], 0.3, {y: -100, opacity: 0, ease: Power3.easeOut})
+      .to(text, 0.3, {y: -100, opacity: 0, ease: Power3.easeOut}, '-=0.2');
   }
 
   function imageEnter(el) {
@@ -104,7 +104,7 @@ export default props => {
     // prettier-ignore
     tl.set(el, {display: 'none', scale: 0.98, opacity: 0})
       .set(el, {display: ''}, 0.4)
-      .to(el, 0.4, {scale: 1, opacity: 1, ease: Power2.easeInOut});
+      .to(el, 0.4, {scale: 1, opacity: 1, ease: Power3.easeOut});
   }
 
   function imageExit(el) {

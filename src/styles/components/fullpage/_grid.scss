@@ -48,6 +48,8 @@
   justify-content: flex-end;
 
   min-height: 224px;
+
+  text-decoration: none;
 }
 
 @include media('>=medium') {

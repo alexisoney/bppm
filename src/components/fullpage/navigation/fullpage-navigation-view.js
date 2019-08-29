@@ -31,6 +31,8 @@ export default ({fullpageApi, sections, active}) => {
     <div className='fullpage-navigation' style={wrapperStyle}>
       <ul className={itemsClassName}>
         {sections.map((section, index) => {
+          if (index === 0) return false;
+
           const isActive = active.index !== undefined ? index === active.index : index === 0 ? true : false;
 
           let itemClassName;
@@ -39,8 +41,8 @@ export default ({fullpageApi, sections, active}) => {
 
           return (
             <li key={section._uid} className={itemClassName} onClick={() => moveTo(index + 1)}>
-              <span className='fullpage-navigation__anchor'>{section.anchor}</span>
               <span className='fullpage-navigation__number'>{createNumber(index)}</span>
+              <span className='fullpage-navigation__anchor'>{section.anchor}</span>
             </li>
           );
         })}
