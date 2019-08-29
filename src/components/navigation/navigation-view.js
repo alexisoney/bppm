@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState, useContext} from 'react';
 import {Link} from 'gatsby';
+import {TimelineLite, Power3} from 'gsap';
 import path from 'path';
 import SbEditable from 'storyblok-react';
 
@@ -20,6 +21,7 @@ export default props => {
   const [navigationWidth, setNavigationWidth] = useState();
   const [wrapperWidth, setWrapperWidth] = useState();
 
+  let isAnimating = false;
   let logoURL;
   logoURL = props.blok.navigations_items.filter(item => item.isLogo)[0];
   logoURL = logoURL && logoURL.link.linktype === 'story' ? logoURL.link.cached_url : '';
@@ -51,10 +53,40 @@ export default props => {
 
   useEffect(() => {
     if (wrapper.current) {
+      isAnimating = true;
+
+      const tl = new TimelineLite({
+        onComplete: () => {
+          isAnimating = false;
+        },
+      });
+
+      const background = document.querySelector('.navigation__background');
+      const itemsContainer = document.querySelector('.navigation__items');
+      const items = Array.from(document.querySelectorAll('.navigation__item'));
+      const languages = document.querySelector('.navigation__languages-items');
+      const wrap = wrapper.current;
+
       if (isOpen) {
-        wrapper.current.classList.add('navigation--open');
+        // prettier-ignore
+        tl.set(itemsContainer, {display: 'block'})
+          .set(items, {display: 'block', opacity: 0})
+          .set(languages, {display: 'flex', opacity: 0})
+          .to(wrap, 0.4, {height: `${window.innerHeight - 68}px`, ease: Power3.easeOut}, 'show')
+          .to(background, 0.4, {opacity: 0.98}, 'show')
+          .staggerTo(items, 0.4, {opacity: 1, stagger: {ease: Power3.easeOut, amount: 0.4}}, null, 'show+=0.1')
+          .to(languages, 0.4, {opacity: 1, ease: Power3.easeOut});
       } else {
-        wrapper.current.classList.remove('navigation--open');
+        // prettier-ignore
+        tl.to(languages, 0.25, {opacity: 0, ease: Power3.easeOut}, 'hide')
+          .to(items, 0.25, {opacity: 0, ease: Power3.easeOut}, 'hide')
+          .to(wrap, 0.4, {height: `64px`, ease: Power3.easeOut}, 'close')
+          .to(background, 0.4, {opacity: 0.7}, 'close')
+          .call(() => languages.removeAttribute('style'))
+          .call(() => itemsContainer.removeAttribute('style'))
+          .call(() => items.forEach(i => i.removeAttribute('style')))
+          .call(() => wrap.style.removeProperty('height'))
+          .call(() => background.removeAttribute('style'));
       }
     }
   }, [isOpen]);
@@ -64,9 +96,8 @@ export default props => {
       if (wrapperWidth <= navigationWidth) {
         wrapper.current.classList.add('navigation--small');
       } else {
-        wrapper.current.classList.remove('navigation--open');
-        wrapper.current.classList.remove('navigation--small');
         setIsOpen(false);
+        wrapper.current.classList.remove('navigation--small');
       }
     }
   }, [wrapperWidth]);
@@ -175,6 +206,6 @@ export default props => {
   }
 
   function toggleNavigation() {
-    setIsOpen(state => !state);
+    if (!isAnimating) setIsOpen(state => !state);
   }
 };
