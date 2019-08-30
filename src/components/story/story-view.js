@@ -22,7 +22,7 @@ class Story extends Component {
     this.isAnimating = false;
 
     this.svgAnimation = undefined;
-    this.svgAnimationSegments = [[0, 150], [150, 315], [315, 470], [470, 930]];
+    this.svgAnimationSegments = [[0, 150], [150, 315], [315, 540], [540, 930]];
 
     this.chapterHeight = undefined;
     this.wrapperPosition = {
@@ -31,6 +31,7 @@ class Story extends Component {
     };
 
     this.illustration = createRef();
+    this.progress = createRef();
     this.scene = createRef();
     this.wrapper = createRef();
 
@@ -98,6 +99,18 @@ class Story extends Component {
         }
       }
 
+      const wrapperHeight = this.wrapperPosition.top - this.wrapperPosition.bottom;
+      const currentProgress = this.wrapperPosition.top - scrollYBottom;
+      const progressHeight = (currentProgress * 100) / wrapperHeight;
+
+      if (progressHeight >= 100) {
+        if (this.progress.current.style.height !== '100vh') this.progress.current.style.height = '100vh';
+      } else if (progressHeight > 0) {
+        this.progress.current.style.height = progressHeight + 'vh';
+      } else {
+        if (this.progress.current.style.height !== '0vh') this.progress.current.style.height = '0vh';
+      }
+
       if (!this.isAnimating) {
         this.isAnimating = true;
         setTimeout(() => {
@@ -107,25 +120,25 @@ class Story extends Component {
         let activeChapter;
 
         if (
-          scrollYBottom > this.wrapperPosition.top + this.chapterHeight * 0.75 &&
-          scrollYBottom < this.wrapperPosition.top + this.chapterHeight * 0.76
+          scrollYBottom > this.wrapperPosition.top + this.chapterHeight * 0.5 &&
+          scrollYBottom < this.wrapperPosition.top + this.chapterHeight * 0.55
         ) {
           this.svgAnimation.playSegments(this.svgAnimationSegments[0], true);
         }
 
-        if (scrollYBottom < this.wrapperPosition.top + this.chapterHeight * 1.5) {
+        if (scrollYBottom < this.wrapperPosition.top + this.chapterHeight * 1) {
           activeChapter = 0;
         } else if (
-          scrollYBottom >= this.wrapperPosition.top + this.chapterHeight * 1.5 &&
-          scrollYBottom < this.wrapperPosition.top + this.chapterHeight * 2.5
+          scrollYBottom >= this.wrapperPosition.top + this.chapterHeight * 1 &&
+          scrollYBottom < this.wrapperPosition.top + this.chapterHeight * 2
         ) {
           activeChapter = 1;
         } else if (
-          scrollYBottom >= this.wrapperPosition.top + this.chapterHeight * 2.5 &&
-          scrollYBottom < this.wrapperPosition.top + this.chapterHeight * 3.5
+          scrollYBottom >= this.wrapperPosition.top + this.chapterHeight * 2 &&
+          scrollYBottom < this.wrapperPosition.top + this.chapterHeight * 3
         ) {
           activeChapter = 2;
-        } else if (scrollYBottom >= this.wrapperPosition.top + this.chapterHeight * 3.5) {
+        } else if (scrollYBottom >= this.wrapperPosition.top + this.chapterHeight * 3) {
           activeChapter = 3;
         }
 
@@ -199,6 +212,7 @@ class Story extends Component {
       <div ref={this.wrapper} className='story'>
         <div ref={this.scene} className='story__scene'>
           <div ref={this.illustration} className='story__illustration' />
+          <div ref={this.progress} className='story__progress' />
 
           <TransitionGroup component={null}>
             {this.props.blok.chapters.map((chapter, index) => {

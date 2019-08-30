@@ -23,9 +23,27 @@
 
 @include media('<medium') {
   .story__illustration {
-    width: 100%;
-    height: 40vh;
-    margin-bottom: #{$unit * 4}px;
+    display: none;
+  }
+}
+
+.story__progress {
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  width: 4px;
+  height: 25vh;
+  margin-bottom: -100vh;
+
+  transition: height 250ms $transition_easing;
+
+  background-color: $colors__alpha;
+}
+
+@include media('<medium') {
+  .story__progress {
+    display: none;
   }
 }
 
