@@ -5,9 +5,10 @@ import ReactMarkdown from 'react-markdown';
 import {TransitionGroup, Transition} from 'react-transition-group';
 
 import arrows from '../../assets/arrows_red.svg';
+import {breakpoints} from '../../variables';
 import illustrationFR from '../../assets/gestion_projet_FR.json';
 import illustrationENG from '../../assets/gestion_projet_ENG.json';
-import {breakpoints} from '../../variables';
+import {Img} from '../cloudinary';
 
 class Story extends Component {
   constructor(props) {
@@ -41,15 +42,6 @@ class Story extends Component {
   }
 
   componentDidMount() {
-    const illustrationJSON = this.props.blok.english ? illustrationENG : illustrationFR;
-    this.svgAnimation = lottie.loadAnimation({
-      container: this.illustration.current,
-      renderer: 'svg',
-      loop: true,
-      autoplay: false,
-      animationData: illustrationJSON,
-    });
-
     this.initComponent();
 
     window.addEventListener('scroll', this.handleScroll);
@@ -150,6 +142,18 @@ class Story extends Component {
     this.setState({windowWidth: window.innerWidth});
 
     if (window.innerWidth >= breakpoints.medium) {
+      if (!this.svgAnimation) {
+        const illustrationJSON = this.props.blok.english ? illustrationENG : illustrationFR;
+
+        this.svgAnimation = lottie.loadAnimation({
+          container: this.illustration.current,
+          renderer: 'svg',
+          loop: true,
+          autoplay: false,
+          animationData: illustrationJSON,
+        });
+      }
+
       TweenLite.set(this.wrapper.current, {height: '500vh'});
       TweenLite.set(this.scene.current, {position: 'sticky', top: 0, left: 0, height: '100vh', width: '100%'});
       TweenLite.set(this.illustration.current, {display: 'block', position: 'absolute', top: 0, left: 0});
@@ -165,16 +169,14 @@ class Story extends Component {
 
       this.handleScroll();
     } else {
+      this.illustration.current.innerHTML = '';
+      this.svgAnimation = undefined;
+
       this.wrapper.current.removeAttribute('style');
       this.scene.current.removeAttribute('style');
       this.illustration.current.removeAttribute('style');
       Array.from(document.querySelectorAll('.story__chapter,.story__title,.story__text')).forEach(el =>
         el.removeAttribute('style')
-      );
-
-      this.svgAnimation.playSegments(
-        [this.svgAnimationSegments[0][0], this.svgAnimationSegments[this.svgAnimationSegments.length - 1][1]],
-        true
       );
     }
   }
@@ -213,6 +215,7 @@ class Story extends Component {
                   onEntering={this.chapterEntering}
                 >
                   <div className='story__chapter'>
+                    <Img className='story__image' url={chapter.image} />
                     <div className='story__content'>
                       <h3 className='story__title'>
                         <ReactMarkdown
