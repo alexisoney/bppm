@@ -10,43 +10,45 @@ export default props => {
 
   const component = useRef();
 
-  const imageObserver = new IntersectionObserver(
-    (entry, observer) => {
-      if (entry[0].isIntersecting) {
-        TweenLite.to(entry[0].target, 0.8, {x: 0, opacity: 1, ease: Power3.easeOut});
-        observer.unobserve(entry[0].target);
-      } else {
-        const x = darkmode ? -50 : 50;
-        TweenLite.to(entry[0].target, 0.8, {x, opacity: 0, ease: Power3.easeOut});
-      }
-    },
-    {threshold: 0.3}
-  );
+  if (typeof IntersectionObserver !== 'undefined') {
+    const imageObserver = new IntersectionObserver(
+      (entry, observer) => {
+        if (entry[0].isIntersecting) {
+          TweenLite.to(entry[0].target, 0.8, {x: 0, opacity: 1, ease: Power3.easeOut});
+          observer.unobserve(entry[0].target);
+        } else {
+          const x = darkmode ? -50 : 50;
+          TweenLite.to(entry[0].target, 0.8, {x, opacity: 0, ease: Power3.easeOut});
+        }
+      },
+      {threshold: 0.3}
+    );
 
-  const strenghtsObserver = new IntersectionObserver(
-    (entry, observer) => {
-      if (entry[0].isIntersecting) {
-        TweenLite.to(entry[0].target, 0.8, {y: 0, opacity: 1, ease: Power3.easeOut});
-        observer.unobserve(entry[0].target);
-      } else {
-        TweenLite.to(entry[0].target, 0.8, {y: 50, opacity: 0, ease: Power3.easeOut});
-      }
-    },
-    {threshold: 0.5}
-  );
+    const strenghtsObserver = new IntersectionObserver(
+      (entry, observer) => {
+        if (entry[0].isIntersecting) {
+          TweenLite.to(entry[0].target, 0.8, {y: 0, opacity: 1, ease: Power3.easeOut});
+          observer.unobserve(entry[0].target);
+        } else {
+          TweenLite.to(entry[0].target, 0.8, {y: 50, opacity: 0, ease: Power3.easeOut});
+        }
+      },
+      {threshold: 0.5}
+    );
 
-  useEffect(() => {
-    const image = component.current.querySelector('.team-member__picture');
-    const strenghts = component.current.querySelector('.team-member__strengths');
+    useEffect(() => {
+      const image = component.current.querySelector('.team-member__picture');
+      const strenghts = component.current.querySelector('.team-member__strengths');
 
-    imageObserver.observe(image);
-    strenghtsObserver.observe(strenghts);
+      imageObserver.observe(image);
+      strenghtsObserver.observe(strenghts);
 
-    return () => {
-      imageObserver.unobserve(image);
-      strenghtsObserver.unobserve(strenghts);
-    };
-  });
+      return () => {
+        imageObserver.unobserve(image);
+        strenghtsObserver.unobserve(strenghts);
+      };
+    });
+  }
 
   return (
     <SbEditable content={props.blok}>
