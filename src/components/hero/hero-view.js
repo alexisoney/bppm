@@ -1,5 +1,5 @@
 import React, {useContext, useRef, useEffect} from 'react';
-import {Power3, TweenMax, TimelineMax} from 'gsap';
+import {Power3, TweenMax, TimelineMax, Sine, Power0} from 'gsap';
 import SbEditable from 'storyblok-react';
 
 import arrows from '../../assets/arrows_red.svg';
@@ -31,7 +31,7 @@ export default props => {
       } else {
         const tl = new TimelineMax();
         // prettier-ignore
-        tl.staggerTo(title, 0.8, {y: 0, opacity: 1, ease: Power3.easeOut}, 0.4)
+        tl.staggerTo(title, 0.4, {y: 0, opacity: 1, ease: Power3.easeOut}, 0.1)
           .to(anchors, 0.4, {y: 0, opacity: 1, ease: Power3.easeOut})
       }
     }

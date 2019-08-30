@@ -25,6 +25,7 @@
   padding: #{$unit}px #{$unit * 2}px;
 
   border: none;
+  border-radius: 0;
   border-bottom: 1px solid $colors__beta;
 
   transition: border 250ms $transition_easing;

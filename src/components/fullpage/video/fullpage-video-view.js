@@ -21,7 +21,7 @@ export default props => {
       if (!appeared) {
         TweenMax.set(el, {opacity: 0, y: 200});
       } else {
-        TweenMax.staggerTo(el, 0.8, {y: 0, opacity: 1, ease: Power3.easeOut}, 0.4);
+        TweenMax.staggerTo(el, 0.4, {y: 0, opacity: 1, ease: Power3.easeOut}, 0.1);
       }
     }
   }, [appeared]);

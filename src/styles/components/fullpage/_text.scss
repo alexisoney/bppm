@@ -12,6 +12,10 @@ $fullpage-text--center: '.fullpage-text:not(.fullpage-text--right):not(.fullpage
   padding: #{$unit * 12}px 0;
 }
 
+.fullpage-text .fullpage__title {
+  margin-bottom: #{$unit * 8}px;
+}
+
 @include media('>=wide') {
   .fullpage-text {
     align-items: flex-start;

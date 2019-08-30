@@ -58,12 +58,14 @@
   font-size: 28px;
 
   & strong {
+    font-size: 28px;
     color: $colors__alpha;
   }
 }
 
 @include media('>=wide') {
-  .fullpage__title {
+  .fullpage__title,
+  .fullpage__title strong {
     font-size: 104px;
   }
 
