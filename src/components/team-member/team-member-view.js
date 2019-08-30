@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
+import {TweenLite, Power3} from 'gsap';
 import SbEditable from 'storyblok-react';
 
 import {Img} from '../cloudinary';
@@ -7,9 +8,49 @@ import linkedinIcon from '../../assets/icon_linkedin.svg';
 export default props => {
   const {darkmode, description, linkedin, name, picture, strengths} = props.blok;
 
+  const component = useRef();
+
+  const imageObserver = new IntersectionObserver(
+    (entry, observer) => {
+      if (entry[0].isIntersecting) {
+        TweenLite.to(entry[0].target, 0.8, {x: 0, opacity: 1, ease: Power3.easeOut});
+        observer.unobserve(entry[0].target);
+      } else {
+        const x = darkmode ? -50 : 50;
+        TweenLite.to(entry[0].target, 0.8, {x, opacity: 0, ease: Power3.easeOut});
+      }
+    },
+    {threshold: 0.3}
+  );
+
+  const strenghtsObserver = new IntersectionObserver(
+    (entry, observer) => {
+      if (entry[0].isIntersecting) {
+        TweenLite.to(entry[0].target, 0.8, {y: 0, opacity: 1, ease: Power3.easeOut});
+        observer.unobserve(entry[0].target);
+      } else {
+        TweenLite.to(entry[0].target, 0.8, {y: 50, opacity: 0, ease: Power3.easeOut});
+      }
+    },
+    {threshold: 0.5}
+  );
+
+  useEffect(() => {
+    const image = component.current.querySelector('.team-member__picture');
+    const strenghts = component.current.querySelector('.team-member__strengths');
+
+    imageObserver.observe(image);
+    strenghtsObserver.observe(strenghts);
+
+    return () => {
+      imageObserver.unobserve(image);
+      strenghtsObserver.unobserve(strenghts);
+    };
+  });
+
   return (
     <SbEditable content={props.blok}>
-      <div className={`team-member ${darkmode && 'team-member--dark'}`}>
+      <div ref={component} className={`team-member ${darkmode && 'team-member--dark'}`}>
         <div className='team-member__content'>
           <h3 className='team-member__name'>{name}</h3>
           <hr className='team-member__divider' />
