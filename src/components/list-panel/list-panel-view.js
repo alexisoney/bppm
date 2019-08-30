@@ -27,7 +27,12 @@ export default props => {
                 onExit={el => imageExit(el)}
                 onEnter={el => imageEnter(el)}
               >
-                <Img className='list-panel__image' url={item.image} sizes='(max-width: 1080px) 100vw, 50vw' />
+                <Img
+                  className='list-panel__image'
+                  url={item.image}
+                  sizes='(max-width: 1080px) 100vw, 50vw'
+                  style={item.position ? {objectPosition: item.position[0]} : null}
+                />
               </Transition>
             );
           })}
