@@ -10,9 +10,14 @@ export default props => {
 
   const {navigate} = useContext(PageTransitionContext);
 
+  const logoURL =
+    props.blok.navigations_items[0].component === 'link' ? props.blok.navigations_items[0].link.cached_url : '';
+
   return (
     <div className={`footer ${props.className}`}>
-      <img className='footer__logo' src={logoSVG} alt='BPPM' />
+      <Link onClick={e => navigate(e)} className='footer__link' to={path.normalize(`/${logoURL}/`)}>
+        <img className='footer__logo' src={logoSVG} alt='BPPM' />
+      </Link>
       <ul className='footer__items'>
         {props.blok.navigations_items.map(item => {
           if (item.component !== 'link' && item.link.linktype !== 'story') return null;
