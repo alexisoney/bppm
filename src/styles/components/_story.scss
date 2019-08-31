@@ -30,9 +30,9 @@
 .story__progress {
   position: absolute;
   top: 0;
-  left: 50%;
+  right: 0;
 
-  width: 4px;
+  width: #{$unit}px;
   height: 25vh;
   margin-bottom: -100vh;
 
