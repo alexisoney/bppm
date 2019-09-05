@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
-import {Helmet} from 'react-helmet';
+import {Link, Meta, Title} from 'react-head';
+// import {Helmet} from 'react-helmet';
 
 import Components from './components.js';
 import ContactCTA from './contact-cta';
@@ -57,7 +58,19 @@ const Page = props => {
 
   return (
     <>
-      <Helmet>
+      <Title>{SEO.title}</Title>
+      <Link rel='canonical' content={SEO.url} />
+      <Meta name='description' content={SEO.description} />
+      <Meta property='og:type' content='website' />
+      <Meta property='og:title' content={SEO.title} />
+      <Meta property='og:description' content={SEO.description} />
+      <Meta property='og:url' content={SEO.url} />
+      <Meta property='og:image' content={SEO.logo} />
+      <Meta property='og:image:secure_url' content={SEO.logo} />
+      <Meta name='twitter:card' content='summary_large_image' />
+      <Meta property='og:site_name' content={siteName} />
+      <Meta name='twitter:image:alt' content={SEO.title} />
+      {/* <Helmet>
         <title>{SEO.title}</title>
         <meta name='description' content={SEO.description} />
         <meta property='og:type' content='website' />
@@ -69,7 +82,7 @@ const Page = props => {
         <meta name='twitter:card' content='summary_large_image' />
         <meta property='og:site_name' content={siteName} />
         <meta name='twitter:image:alt' content={SEO.title} />
-      </Helmet>
+      </Helmet> */}
       <Navigation blok={props.navigation} />
       {props.blok.body &&
         props.blok.body.map(blok =>

@@ -3,7 +3,8 @@ module.exports = {
     siteUrl: 'https://www.bppm.fr',
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
+    // 'gatsby-plugin-react-helmet',
+    `gatsby-plugin-react-head`,
     'gatsby-plugin-robots-txt',
     `gatsby-plugin-sass`,
     `gatsby-plugin-sitemap`,
